@@ -1,0 +1,286 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+    #image_with_text_slideshow_wrapper{
+      height:100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:{{section.settings.customScolor}};
+    }
+    #image_with_text_slideshow_wrapper .swiper {
+      width: 100%;
+      height: 100%;
+    }
+    #image_with_text_slideshow_wrapper .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #iwts01 img{
+      object-fit:cover;
+      border-radius:8px;
+    }
+    .customS-swiper-button-next{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(180deg);
+  }
+  .customS-swiper-button-next img{
+    width:100%;
+  }
+  .customS-swiper-button-prev{
+    width:50px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+  }
+  .customS-swiper-button-prev img{
+    width:100%;
+  }
+    #iwtsWrapper{
+      width:80%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:3rem;
+      border-radius:20px;
+    }
+    #customSArrow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:absolute;
+      right:5%;
+      bottom:1%;
+      z-index:99999;
+      width:110px;
+    }
+  @media(max-width:767px){
+    .customS-swiper-button-next{
+    width:40px;
+    height:40px;
+  }
+  .customS-swiper-button-next img{
+    width:100%;
+  }
+  .customS-swiper-button-prev{
+    width:40px;
+    height:40px;
+  }
+  .customS-swiper-button-prev img{
+    width:100%;
+  }
+  #iwtsWrapper{
+    flex-direction:column!important;
+    margin-bottom: 6rem;
+  }
+  #image_with_text_slideshow_wrapper {
+    height: 110vh;
+  }
+    #customSArrow {
+    justify-content: space-evenly;
+    right: 35%;
+   }
+  #iwts01 img{
+    height:100%!important;
+  }
+  }
+</style>
+<section id="image_with_text_slideshow_wrapper">
+  <div class="swiper mySwiperSlideShow">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div
+            id="iwtsWrapper"
+            style="background:{{ block.settings.customScardcolor }};flex-direction:{{ block.settings.imageposition}};"
+          >
+            <div id="iwts01" style="padding:2rem;width:{{ section.settings.customSimageWidth }};max-height:400px;">
+              {% if block.settings.customslideshowimage != blank %}
+              <img src="{{ block.settings.customslideshowimage | img_url:'master' }}" width="100%" height="400px">
+              {% elsif block.settings.customslideshowimage == blank %}
+              <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_5.png?v=1717413393" width="100%" height="400px">
+                {% endif %}
+            </div>
+            <div
+              id="iwts02"
+              style="display:flex;justify-content:center;align-items:{{ block.settings.customSalignment }};flex-direction:column;"
+            >
+              <h2 style="margin:0;">{{ block.settings.customStext }}</h2>
+              <div style="width:80%;{% if block.settings.customSalignment == 'flex-start' %}text-align:left;{% elsif block.settings.customSalignment == 'center' %}text-align:center;{% elsif block.settings.customSalignment == 'flex-end' %}text-align:right;{% endif %}">
+                {{ block.settings.customSdesc }}
+              </div>
+              <a
+                style="text-decoration:none;font-weight:800;font-size:2rem;color:#fff;padding:.5rem 2rem;background:#000;border-radius:40px;"
+                href="{{ block.settings.customSbtnLink }}"
+              >
+                {{- block.settings.customSbtnText -}}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div id="customSArrow">
+      <div class="customS-swiper-button-next">
+        <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+      </div>
+      <div class="customS-swiper-button-prev">
+        <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  var mySwiperSlideShow = new Swiper(".mySwiperSlideShow", {
+    rewind: true,
+    navigation: {
+      nextEl: ".customS-swiper-button-next",
+      prevEl: ".customS-swiper-button-prev",
+    },
+  });
+</script>
+
+{% schema %}
+{
+  "name": "image_with_text_slideshow",
+  "settings": [
+    {
+      "type": "select",
+      "id": "customSimageWidth",
+      "label": "Image size on desktop",
+      "options": [
+        {
+          "label": "One Third",
+          "value": "30%"
+        },
+        {
+          "label": "One Half",
+          "value": "50%"
+        },
+        {
+          "label": "Three fifths",
+          "value": "70%"
+        },
+        {
+          "label": "Two Thirds",
+          "value": "100%"
+        }
+      ],
+      "default" : "50%"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "customScolor",
+      "label": "Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name" : "Image With Text Slideshow",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "customslideshowimage",
+          "label": "Image"
+        },
+        {
+          "type": "radio",
+          "id": "imageposition",
+          "label": "image position on desktop",
+          "options": [
+            {
+              "label": "Left",
+              "value": "row"
+            },
+            {
+              "label": "Right",
+              "value": "row-reverse"
+            }
+          ],
+          "default" : "row"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "customStext",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "customSdesc",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "customSalignment",
+          "label": "Text Alignment",
+          "options": [
+            {
+              "label": "Left",
+              "value": "flex-start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "flex-end"
+            }
+          ],
+          "default" : "center"
+        },
+        {
+          "type": "header",
+          "content": "Link"
+        },
+        {
+          "type": "url",
+          "id": "customSbtnLink",
+          "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "customSbtnText",
+          "label": "Label"
+        },
+        {
+          "type": "color",
+          "id": "customScardcolor",
+          "label": "Card Color"
+        }
+      ]
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Image With Text Slideshow"
+    }
+  ]
+ }
+{% endschema %}

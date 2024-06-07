@@ -1,0 +1,236 @@
+<style>
+  .section-timeline{
+    height: 100vh;
+    text-align:center;
+  }
+  #timelinewrapper{
+    width:100%;
+    height:70vh;
+    overflow:hidden;
+    margin-top:2rem;
+    position:relative;
+  }
+  #timeline{
+    margin: 4rem auto 0 auto;
+    width:800px;
+    height:800px;
+    background:transparent;
+    border:5px dashed #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:100% 100% 0 0;
+    position:relative;
+  }
+  #time01text_Ph67nj{
+    position: absolute;
+    top: -5%;
+    background: red;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+  }
+  #time01text_nRpBcF{
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+  }
+  #time01text_qL8mqg{
+    position: absolute;
+    top: 25%;
+    left: -1%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+  }
+  #time01text_YLGCmF{
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    background:url("{{ section.settings.timeimg04 | img_url:'master' }}");
+    background-position:center;
+    background-size:cover;
+  }
+  #time01text_xNJG9H{
+    position: absolute;
+    top: 5%;
+    right: 15%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    background:url("{{ section.settings.timeimg05 | img_url:'master' }}");
+    background-position:center;
+    background-size:cover;
+  }
+  #time01text_fwtPza{
+    position: absolute;
+    top: 25%;
+    right: -1%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    background:url("{{ section.settings.timeimg06 | img_url:'master' }}");
+    background-position:center;
+    background-size:cover;
+  }
+  #time01text_YQgkT7{
+    position: absolute;
+    top: 50%;
+    right: -5%;
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    background:url("{{ section.settings.timeimg07 | img_url:'master' }}");
+    background-position:center;
+    background-size:cover;
+  }
+  #timelinecenterimg{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    height: 400px;
+    width: 400px;
+    transform: translate(-50%, -50%);
+  }
+  #timelinecenterimg img{
+     border-radius: 50%;
+     object-fit:cover;
+  }
+  .section-timeline a {
+    background: #000;
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    color:#fff;
+    text-decoration:none;
+}
+  @media(max-width:767px){
+    .section-timeline{
+      display:none;
+    }
+  }
+</style>
+<section class="section-timeline">
+  <h2 style="margin-top:2rem;">{{ section.settings.timelinetext }}</h2>
+  <a href="{{ section.settings.timelinebtnurl }}">{{ section.settings.timelinebtntext }}</a>
+<div id="timelinewrapper">
+<div id="timeline">
+  {% for block in section.blocks %} 
+    <style>
+      #time01{{ block.id }} img{
+        height:80px;
+        width:80px;
+        border-radius:50%;
+        object-fit:cover;
+      }
+      #timelinecenter{
+        height:400px;
+        object-fit:cover;
+      }
+    </style>
+  <div id="time01{{ block.id }}">
+    <img src="{{ block.settings.timeimg | img_url:'master' }}" width="" height="">
+  </div>
+    {% endfor %}
+</div>
+  <div id="timelinecenterimg">
+    <img id="timelinecenter" src="" width="400px" height="400px">
+  </div>
+</div>
+  <div style="display:flex; justify-content:center;align-items:center;width:100%;">
+<div style="display:flex; justify-content:center;align-items:center;width:50%;">
+  <h2>text</h2>
+</div>
+<div style="display:flex; justify-content:center;align-items:center;width:50%;">
+  <h2>text</h2>
+</div>
+  </div>
+  </section>
+
+  <script>
+    const timelinecenterimg = document.getElementById("timelinecenter");
+    const time01 = document.querySelector("#time01text_Ph67nj img");
+    const time02 = document.querySelector("#time01text_nRpBcF img");
+    const time03 = document.querySelector("#time01text_qL8mqg img");
+    const time04 = document.querySelector("#time01text_YLGCmF img");
+    const time05 = document.querySelector("#time01text_xNJG9H img");
+    const time06 = document.querySelector("#time01text_fwtPza img");
+    const time07 = document.querySelector("#time01text_YQgkT7 img");
+    time01.addEventListener("click", timeline01);
+    time02.addEventListener("click", timeline02);
+    time03.addEventListener("click", timeline03);
+    time04.addEventListener("click", timeline04);
+    time05.addEventListener("click", timeline05);
+    time06.addEventListener("click", timeline06);
+    time07.addEventListener("click", timeline07);
+    timelinecenterimg.src = time01.src;
+function timeline01(){
+  console.log("hello");
+  timelinecenterimg.src = time01.src;
+}
+function timeline02(){
+  timelinecenterimg.src = time02.src;
+}
+function timeline03(){
+  timelinecenterimg.src = time03.src;
+}
+function timeline04(){
+  timelinecenterimg.src = time04.src;
+}
+function timeline05(){
+  timelinecenterimg.src = time05.src;
+}
+function timeline06(){
+  timelinecenterimg.src = time06.src;
+}
+function timeline07(){
+  timelinecenterimg.src = time07.src;
+}
+    
+  </script>
+{% schema %}
+  {
+    "name": "TimeLine",
+    "max_blocks": 7,
+    "settings": [
+      {
+        "type": "text",
+        "id": "timelinetext",
+        "label": "Add Heading"
+      },
+      {
+        "type": "text",
+        "id": "timelinebtntext",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "timelinebtnurl",
+        "label": "Button Url"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Add Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "timeimg",
+            "label": "Add Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Timeline"
+      }
+    ]
+  }
+{% endschema %}

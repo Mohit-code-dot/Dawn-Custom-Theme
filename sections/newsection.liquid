@@ -1,0 +1,503 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<style>
+          #NewSectionWrapper{
+            width:100%;
+            height:100vh;
+            display:flex;
+            justify-content: space-evenly;
+            align-items:center;
+            background:rgba(255,246,224,1);
+            position:relative;
+          }
+          #NewSectionLeft{
+            width:50%;
+            position:relative;
+          }
+          #NewSectionRight{
+            width:50%;
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            flex-direction:column;
+          }
+          text{
+            font-family: sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+         }
+        #NewSectionLeft img {
+          width: 98%;
+          height:98%;
+          object-fit: cover;
+          border-radius: 0 290px 290px 0;
+          padding: 1rem 0;
+          position:absolute;
+          left:0;
+      }
+      #NewSectionRight .card-wrapper {
+        display:none;
+      }
+      @media(max-width:767px){
+        #NewSectionWrapper{
+          flex-direction:column;
+          height:100%;
+          padding:5rem 0;
+        }
+        #NewSectionLeft {
+        width: 90%;
+        margin-left: -5rem;
+    }
+      #NewSectionRight{
+      width:100%;
+      padding:50px 0;
+      }
+      #NewSectionLeft svg{
+      bottom:5%;
+      }
+      }
+    @media(min-width:1920px){
+       #NewSectionLeft img {
+      object-fit: cover;
+      border-radius: 0 375px 375px 0;
+      padding: 2rem 0rem 2rem 0;
+  }
+      #descriptionWrapper{
+        width:60%;
+      }
+    }
+</style>
+<section>
+  <div id="NewSection">
+    <div id="NewSectionWrapper">
+      <div id="NewSectionLeft">
+        <svg
+          class="svgwave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1374.5 1081"
+          style="width:auto; height: auto; overflow: visible;positiom:relative;"
+        >
+          <path id="wavepath" d="M.5 1080.5V.5h834a540.13 540.13 0 01210.21 1037.55 536.68 536.68 0 01-210.21 42.45z" style="fill: transparent; stroke: transparent; stroke-width: 1px;" ></path>
+          <text text-anchor="left" style="text-transform: uppercase; font-size: 3rem; fill: rgba(1, 120, 91,1);">
+              <textPath href="#wavepath" side="left" startOffset="50%">
+              <animate attributeName="startOffset" from="0%" to="20%" begin="0s" dur="20s" repeatCount="indefinite"></animate>
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              <tspan style="fill: {{ section.settings.svgtextcolor }}">{{ section.settings.svgtext }}</tspan>&nbsp;
+              </textPath>
+          </text>
+        </svg>
+    {% if section.settings.animationimg != blank %}
+        <img
+          width=""
+          height=""
+          src="{{ section.settings.animationimg | img_url : 'master' }}"
+        >
+      {% elsif section.settings.animationimg == blank %}
+        <img
+          width=""
+          height=""
+          src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378"
+        >
+      {% endif %}
+      </div>
+      <div id="NewSectionRight">
+        {% for block in section.blocks -%}
+          {% case block.type %}
+            {% when 'CustomProductCard' %}
+              {%- assign productLookbook = all_products[block.settings.product] -%}
+              {%- render 'card-product', product: productLookbook -%}
+              <style>
+                #titleWrapper{
+                  width:80%;
+                }
+                #titleWrapper h1{
+                  color:{{block.settings.headingcolor}};
+                  text-align:left;
+                  margin:0;
+                  font-weight:800;
+                }
+              </style>
+              <div id="titleWrapper">
+                <h1>{{ productLookbook.title }}</h1>
+              </div>
+
+              <div id="descriptionWrapper" style="width:80%;">
+                <p style="font-size:{{ block.settings.descfont_size }}px;margin:0;color:{{ block.settings.descolor }};text-align:left;line-height:30px;">
+                  {{ productLookbook.description | truncatewords: 40 }}
+                </p>
+              </div>
+
+              <div
+                id="priceWrapper"
+                style="width:80%;font-size:2rem;font-weight:800;color:{{ block.settings.pricecolor }}"
+              >
+                {{ productLookbook.price | money }}
+              </div>
+
+              <style>
+                  #BtnWrapper{
+                  width:80%;
+                  }
+                  #BtnWrapper input{
+                  width:{{ block.settings.btnwidth }}%;
+                  padding:1rem;
+                  display:flex;
+                  justify-content: center;
+                  align-items:center;
+                  border-radius:{{block.settings.vertical_alignment }}px;
+                  text-decoration:none;
+                  color:{{block.settings.btncolor}};
+                  font-size:{{block.settings.btnfont_size}}px;
+                  margin:1rem 0;
+                  border:none;
+                  background:{{block.settings.btnbackgroundcolor}};
+                  cursor:pointer;
+                }
+                @media(max-width:767px){
+                #BtnWrapper input{
+                  width:100%!important;
+                }
+                }
+                {% if block.settings.btnhovereffect %}
+                #NewSectionRight .textanimationbtn:hover{
+                  background:{{block.settings.btnhovereffect}}
+                }
+                {% endif %}
+              </style>
+              <div id="BtnWrapper">
+                <form method="post" action="/cart/add">
+                  <input type="hidden" name="id" value="{{ productLookbook.variants.first.id }}">
+                  <input type="submit" value="Add To Cart" class="textanimationbtn">
+                </form>
+              </div>
+
+            {% when 'Text' %}
+              <style>
+                #TextWrapper p,h1,h2,h3,h4,h5,h6{
+                  margin:0;
+                  color:{{ block.settings.anytextcolor }};
+                 }
+              </style>
+              <div id="TextWrapper" style="width:80%;">
+                {{ block.settings.anytext }}
+              </div>
+
+            {% when 'Button' %}
+              <style>
+                @media(max-width:767px){
+                #ButtonWrapper a{
+                  width:100%!important;
+                }
+                }
+              </style>
+              <div id="ButtonWrapper" style="width:80%;">
+                <a
+                  style="
+                    background:{{ block.settings.buttonBgColor }};
+                    color:{{ block.settings.buttontextcolor }};
+                    font-weight:800;
+                    text-decoration:none;
+                    padding:1rem;
+                    font-size:{{ block.settings.buttonfont_size }}px;
+                    border-radius: {{ block.settings.Button_alignment }}px;
+                    width:{{ block.settings.buttonwidth }}%;
+                    display:flex;
+                    justify-content: center;
+                    align-items:center;
+                  "
+                  href="{{ block.settings.buttonurl }}"
+                >
+                  {{- block.settings.buttonText -}}
+                </a>
+              </div>
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "text Animation",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Image Section"
+    },
+    {
+      "type" : "text",
+      "id" : "svgtext",
+      "label" : "Text"
+    },
+    {
+      "type" : "color",
+      "id" : "svgtextcolor",
+      "label" : "Text Color"
+    },
+    {
+      "type" : "image_picker",
+      "id" : "animationimg",
+      "label" : "Add Image"
+    }
+     ],
+  "blocks" : [
+    {
+      "type": "CustomProductCard",
+      "name": "Add Product",
+      "settings" : [
+       {
+      "type" : "header",
+      "content" : "Title Section"
+    },
+    {
+      "type" : "color",
+      "id" : "headingcolor",
+      "label" : "Title Color"
+    },
+    {
+      "type" : "header",
+      "content" : "Description Section"
+    },
+    {
+       "type": "range",
+       "id": "descfont_size",
+       "min": 12,
+       "max": 34,
+       "step": 1,
+       "unit": "px",
+       "label": "Font size",
+       "default": 16
+    },
+    {
+      "type" : "color",
+      "id" : "descolor",
+      "label" : "Description Color"
+    },
+    {
+      "type" : "color",
+      "id" : "pricecolor",
+      "label" : "Price Color"
+    },
+    {
+      "type" : "header",
+      "content" : "Button Section"
+    },
+         {
+          "type": "range",
+          "id": "btnfont_size",
+          "min": 12,
+          "max": 34,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+          },
+        {
+          "type" : "color",
+          "id" : "btncolor",
+          "label" : "Button Text Color"
+        },
+        {
+          "type" : "color_background",
+          "id" : "btnbackgroundcolor",
+          "label" : "Button Background Color"
+        },
+        {
+          "type" : "color_background",
+          "id" : "btnhovereffect",
+          "label" : "Hover On Button"
+        },
+        {
+          "type": "select",
+          "id": "vertical_alignment",
+          "label": "Vertical alignment",
+          "options": [
+        {
+          "value": "0",
+          "label": "Normal"
+        },
+        {
+         "value": "15",
+         "label": "Curved"
+        },
+        {
+        "value": "20",
+        "label": "Round"
+        }
+      ],
+        "default": "15"
+       },
+        {
+         "type": "range",
+         "id": "btnwidth",
+          "min": 10,
+          "max": 50,
+          "step": 5,
+          "unit": "%",
+          "label": "Button Width",
+          "default": 30
+          },
+          {
+          "type" : "header",
+          "content" : "Add Product Section"
+         },
+         {
+         "type": "product",
+         "id": "product",
+         "label": "Product"
+       }
+      ]
+    },
+    {
+      "type": "Text",
+      "name": "Add Text",
+      "settings" : [
+        {
+          "type" : "richtext",
+          "id" : "anytext",
+          "label" : "Add Heading"
+        },
+        {
+          "type" : "color",
+          "id" : "anytextcolor",
+          "label" : "Text Color"
+        }
+      ]
+    },
+    {
+      "type" : "Button",
+      "name" : "Add Button",
+      "settings" : [
+        {
+          "type" : "text",
+          "id" : "buttonText",
+          "label" : "Button Text"
+        },
+        {
+          "type" : "color_background",
+          "id" : "buttonBgColor",
+          "label" : "Button Background Color"
+        },
+        {
+          "type" : "color",
+          "id" : "buttontextcolor",
+          "label" : "Button Text Color"
+        },
+        {
+          "type" : "url",
+          "id" : "buttonurl",
+          "label" : "Button Url"
+        },
+        {
+          "type": "range",
+          "id": "buttonfont_size",
+          "min": 12,
+          "max": 34,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+          },
+        {
+          "type": "select",
+          "id": "Button_alignment",
+          "label": "Vertical alignment",
+          "options": [
+        {
+          "value": "0",
+          "label": "Normal"
+        },
+        {
+         "value": "15",
+         "label": "Curved"
+        },
+        {
+        "value": "20",
+        "label": "Round"
+        }
+      ],
+        "default": "15"
+       },
+        {
+         "type": "range",
+         "id": "buttonwidth",
+          "min": 10,
+          "max": 50,
+          "step": 5,
+          "unit": "%",
+          "label": "Button Width",
+          "default": 30
+          }
+      ]
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "text Animation",
+      "category" : "text Animation"
+    }
+  ]
+}
+{% endschema %}

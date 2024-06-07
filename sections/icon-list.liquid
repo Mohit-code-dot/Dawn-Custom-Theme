@@ -1,0 +1,250 @@
+<style>
+
+  #icon-list-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    background:{{section.settings.icon-list-bg-color}};
+  }
+  #icon-list-icons img{
+    width:{{section.settings.icon-size}}px;
+    height:{{section.settings.icon-size}}px;
+  }
+  #icon-list{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:column;
+    min-height:200px;
+  }
+</style>
+<section>
+    <h2 style="text-align:center;">{{ section.settings.icon-list-title }}</h2>
+  <div id="icon-list-wrapper">
+    {% for block in section.blocks %}
+      <div id="icon-list">
+      <div id="icon-list-icons" style="padding:2rem;">
+        {% if block.settings.icon-list-custom-image != blank %}
+        <img src="{{ block.settings.icon-list-custom-image | img_url:'master' }}"/>
+        {% endif %}
+        {% if block.settings.icon-list-custom-image == blank %}
+        {% if block.settings.icon-list-icons == 'globe' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/globe.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'airplane' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/airplane.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'tumble-dry' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/tumble-dry.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'location' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/location.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'user' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/user.png?v=1713444204" />
+          {% elsif block.settings.icon-list-icons == 'leather' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/leather.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'trousers' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/trousers.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'like' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/like.png?v=1713444204" />
+          {% elsif block.settings.icon-list-icons == 'leaves' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/leaves.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'iron' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/iron.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'box' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/box.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'heart' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/heart.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'chat' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/chat.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'check-mark' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/check-mark.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'eye_1' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/eye_1.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'padlock' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/padlock.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'question' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/question.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'shopping' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/shopping.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'coat-hanger-thin-outline' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/coat-hanger-thin-outline.png?v=1713444203" />
+          {% elsif block.settings.icon-list-icons == 'oil-free' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/oil-free.png?v=1713449654" />
+          {% elsif block.settings.icon-list-icons == 'free_4' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/free_4.png?v=1713449654" />
+          {% elsif block.settings.icon-list-icons == 'label' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/label.png?v=1713449654" />
+          {% elsif block.settings.icon-list-icons == 'free_3' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/free_3.png?v=1713449654" />
+          {% elsif block.settings.icon-list-icons == 'free_2' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/free_2.png?v=1713449654" />
+          {% elsif block.settings.icon-list-icons == 'no-gmo' %}
+          <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/no-gmo.png?v=1713449654" />
+          {% endif %}
+          {% endif %}
+        </div>
+        <div id="icon-list-text" style="text-align:center;">{{ block.settings.icon-list-text }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "icon-list",
+    "settings": [
+      {
+        "type": "text",
+        "id": "icon-list-title",
+        "label": "Title"
+      },
+      {
+        "type": "range",
+        "id": "icon-size",
+        "label": "Icon Max Width",
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "min": 50,
+        "default" : 50
+      },
+      {
+        "type": "header",
+        "content": "Color"
+      },
+      {
+        "type": "color",
+        "id": "icon-list-bg-color",
+        "label": "Color"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "select",
+        "name" : "Add Block",
+        "settings": [
+          {
+            "type": "select",
+            "id": "icon-list-icons",
+            "label": "Icon",
+            "options": [
+              {
+                "label": "globe",
+                "value": "globe"
+              },
+              {
+                "label": "Coat",
+                "value": "coat-hanger-thin-outline"
+              },
+              {
+                "label": "shopping",
+                "value": "shopping"
+              },
+              {
+                "label": "question",
+                "value": "question"
+              },
+              {
+                "label": " padlock",
+                "value": " padlock"
+              },
+              {
+                "label": "eye_1",
+                "value": "eye_1"
+              },
+              {
+                "label": "check-mark",
+                "value": "check-mark"
+              },
+              {
+                "label": "chat",
+                "value": "chat"
+              },
+              {
+                "label": "heart",
+                "value": "heart"
+              },
+              {
+                "label": "box",
+                "value": "box"
+              },
+              {
+                "label": "iron",
+                "value": "iron"
+              },
+              {
+                "label": "leaves",
+                "value": "leaves"
+              },
+              {
+                "label": "like",
+                "value": "like"
+              },
+              {
+                "label": "trousers",
+                "value": "trousers"
+              },
+              {
+                "label": "leather",
+                "value": "leather"
+              },
+              {
+                "label": "user",
+                "value": "user"
+              },
+              {
+                "label": "location",
+                "value": "location"
+              },
+              {
+                "label": "tumble-dry",
+                "value": "tumble-dry"
+              },
+              {
+                "label": "airplane", 
+                "value": "airplane"
+              }, 
+              {
+                "label": "oil-free", 
+                "value": "oil-free"
+              }, 
+              {
+                "label": "Paraben Free", 
+                "value": "free_4"
+              }, 
+              {
+                "label": "Alcohol Free", 
+                "value": "label"
+              }, 
+              {
+                "label": "Cruelity Free", 
+                "value": "free_3"
+              }, 
+              {
+                "label": "Nut free", 
+                "value": "free_2"
+              },
+              {
+                "label": "no-gmo", 
+                "value": "no-gmo"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "icon-list-text",
+            "label": "Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon-list-custom-image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "icon-list"
+      }
+    ]
+  }
+{% endschema %}

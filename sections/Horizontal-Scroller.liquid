@@ -1,0 +1,204 @@
+<style>
+     #MainContent{
+       overflow:hidden;
+     }
+      #outer .wrapper {
+       min-height: 100vh;
+       overflow: hidden;
+       background:{{section.settings.scrollersectionbgcolor}};
+    }
+
+    #outer .factsContainer {
+        padding: 0em 2em;
+        text-align: center;
+        line-height: 10vh;
+        overflow: hidden;
+    }
+
+    #outer .Scrollerwrapper h2 {
+        font-size: 2em;
+        padding: 1rem 0rem;
+        text-align:center;
+        font-weight:800;
+        color: {{section.settings.scrollerheadingcolor}};
+    }
+
+    #outer .factsContainer_sm {
+        display: flex;
+        width: 300vw;
+    }
+
+    #outer .fact p,#outer .fact h3,#outer .fact h4,#outer .fact a{
+      margin: 0;
+      padding: 0;
+      line-height: 25px;
+    }
+     #outer .fact h4{
+       font-weight:800;
+     }
+    #outer .fact a{
+      padding:1rem 3rem;
+      width:50%;
+      background:#000;
+      color:#fff;
+      text-decoration:none;
+      border-radius:15px;
+    }
+  #outer .fact a:after{
+    content:'';
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+
+    #outer .fact {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: space-between;
+        padding: 1em;
+        align-items: center;
+        color: #F0C368;
+        background:{{section.settings.scrollercardbgcolor}};
+        margin:0 1rem;
+        border-radius:20px;
+    }
+
+    #outer .fact img {
+        width: 300px;
+        height: 300px;
+    }
+    @media(min-width:1920px){
+     #outer .fact {
+      margin: 0 2rem;
+      flex: 0;
+  }
+    }
+</style>
+<div id="outer">
+  <div class="Scrollerwrapper">
+    <h2>{{ section.settings.scrollerheading }}</h2>
+    <div class="factsContainer">
+      <div class="factsContainer_sm">
+        {% for product in section.settings['Horizontal-Scroller-Collection'].products %}
+          <div class="fact">
+            {% if product.featured_image != blank %}
+            <img src="{{ product.featured_image | img_url:'master'}}" width="" height="">
+              {% elsif product.featured_image == blank %}
+            <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378" width="" height="">
+              {% endif %}
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.description | truncatewords: 20 }}</p>
+            <h4>{{ product.price | money_with_currency }}</h4>
+            <a href="{{ product.url }}">Buy Now</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<script>
+
+  let mm = gsap.matchMedia();
+
+mm.add("(min-width: 1920px)", () => {
+  let scroll_tl = gsap.timeline(),
+        facts = [...document.querySelectorAll('.fact')]
+    scroll_tl.to(facts, {
+        xPercent: -58 * (facts.length - 1),
+        scrollTrigger: {
+            trigger: ".factsContainer_sm",
+            start: "center center",
+            pin: true,
+            // horizontal: true,
+            // pinSpacing:false,
+            // markers: true,
+            scrub: 1,
+            snap: 1 / (facts.length - 1),
+            end: () => `+=10000`
+        }
+    });
+});
+  
+mm.add("(min-width: 768px) and (max-width: 1900px)", () => {
+  let scroll_tl = gsap.timeline(),
+        facts = [...document.querySelectorAll('.fact')]
+    scroll_tl.to(facts, {
+        xPercent: -80 * (facts.length - 1),
+        scrollTrigger: {
+            trigger: ".factsContainer_sm",
+            start: "center center",
+            pin: true,
+            // horizontal: true,
+            // pinSpacing:false,
+            // markers: true,
+            scrub: 1,
+            snap: 1 / (facts.length - 1),
+            end: () => `+=9000`
+        }
+    });
+});
+
+
+mm.add("(max-width: 767px)", () => {
+  let scroll_tl = gsap.timeline(),
+        facts = [...document.querySelectorAll('.fact')]
+    scroll_tl.to(facts, {
+        xPercent: -108 * (facts.length - 1),
+        scrollTrigger: {
+            trigger: ".factsContainer_sm",
+            start: "center center",
+            pin: true,
+            // horizontal: true,
+            // pinSpacing:false,
+            // markers: true,
+            scrub: 1,
+            snap: 1 / (facts.length - 1),
+            end: () => `+=4520`
+        }
+    });
+});
+</script>
+{% schema %}
+{
+  "name": "Horizontal Scroller",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "Horizontal-Scroller-Collection",
+      "label": "Add Collection"
+     },
+    {
+      "type": "text",
+      "id": "scrollerheading",
+      "label": "Add Heading"
+    },
+    {
+      "type": "color",
+      "id": "scrollerheadingcolor",
+      "label": "Add Heading Color"
+    },
+    {
+      "type": "color",
+      "id": "scrollersectionbgcolor",
+      "label": "Add Section Color"
+    },
+    {
+      "type": "color",
+      "id": "scrollercardbgcolor",
+      "label": "Add Card Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Horizontal Scroller"
+    }
+  ]
+}
+{% endschema %}

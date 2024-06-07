@@ -1,0 +1,261 @@
+
+<style>
+  #HSliderSlideshowWrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:89vh;
+    background:#ffff6a;
+    overflow:hidden;
+  }
+  #HSliderSlideshow02 img{
+    width:100%;
+  }
+  #HSliderSlideshow02{
+    overflow:hidden;
+    position:relative;
+  }
+  #HSliderSlideshow02 .slick-dots{
+    position: absolute;
+    top: 40%;
+    right:3%;
+  }
+  #HSliderSlideshow02 .slick-dots .slick-active button{
+    background:#000;
+  }
+  #HSliderSlideshow02 .slick-dots button{
+    border: 2px solid #000;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 100%;
+    margin:.5rem 0;
+    width:20px;
+    height:20px;
+  }
+  #HSliderSlideshow02 .slick-dots li{
+    list-style:none;
+  }
+  #HSliderSlideshow01 a{
+    text-decoration: none;
+    color: #fff;
+    background: #000;
+    padding: 1.5rem 8rem;
+    border-radius: 15px;
+  }
+  @media(min-width:1920px){
+
+  }
+  @media(min-width: 800px) and (max-width: 1200px){
+    #HSliderSlideshowWrapper{
+    height:70vh;
+  }
+    #HSliderSlideshow02 {
+      height:100%!important
+    }
+  }
+  @media(max-width:767px){
+    #HSliderSlideshowWrapper{
+      flex-direction: column-reverse;
+      height:100%!important;
+    }
+    #HSliderSlideshow01 span{
+      font-size: 8rem!important;;
+      letter-spacing:-4px!important;;
+    }
+    #HSliderSlideshow01 p{
+      font-size:3rem!important;
+      margin: 3rem 0 3rem 4rem!important;
+    }
+    #HSliderSlideshow01 h2{
+      font-size:2rem!important;
+      text-align: center;
+    }
+    #HSliderSlideshow01 a {
+    padding: 1.5rem 6rem!important;
+    margin-left: 4rem!important;
+    }
+    #HSliderSlideshow01{
+      width:100%!important;
+      height:50%;
+      margin:3rem 0;
+    }
+    #HSliderSlideshow02 .item{
+      margin:0!important;
+    }
+    #HSliderSlideshow02{
+      width:100%!important;
+      height:50%;
+      overflow:hidden;
+    }
+    #HSliderSlideshow02 .slick-dots{
+    top: 20%;
+    right:3%;
+  }
+  #HSliderSlideshow02 .slick-dots button{
+    padding:.5rem;
+  }
+  }
+</style>
+<section id="HSliderSlideshowWrapper">
+  <div
+    id="HSliderSlideshow01"
+    style="width:50%;display:flex;justify-content:center;align-items:center;flex-direction:column;"
+  >
+    <div>
+      <h2 style="font-size: 3.8rem;color:#000;font-weight: 800;letter-spacing: -1px;">
+        <span
+          style="
+            font-size: 15rem;
+            color: #000;
+            letter-spacing: -10px;
+            line-height: 0;
+          "
+          >JOVA</span
+        ><br>
+        EAT GOOD.FEEL GOOD.
+      </h2>
+      <p
+        style="
+          font-size: 6rem;
+          color: #000;
+          font-weight: 800;
+          line-height: 1;
+          margin: 3rem 0px;
+        "
+      >
+        {{ section.settings.slicksectiontext }}
+      </p>
+      <a href="{{ section.settings.slicksectionbtnurl }}">{{ section.settings.slicksectionbtn }}</a>
+    </div>
+  </div>
+  <div id="HSliderSlideshow02" style="width:50%;">
+    <article>
+      <div class="slider">
+        <div class="vertical-slider">
+          <div class="slick">
+              <div class="item">
+                {% if section.settings.slickimage01 != blank %}
+                <img src="{{ section.settings.slickimage01 | img_url:'master' }}">
+                  {% elsif section.settings.slickimage01 == blank %}
+                <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_6-removebg-preview.png?v=1717414487">
+                  {% endif %}
+              </div>
+              <div class="item">
+               {% if section.settings.slickimage02 != blank %}
+                <img src="{{ section.settings.slickimage02 | img_url:'master' }}">
+                  {% elsif section.settings.slickimage02 == blank %}
+                <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_6-removebg-preview.png?v=1717414487">
+                  {% endif %}
+              </div>
+              <div class="item">
+                {% if section.settings.slickimage03 != blank %}
+                <img src="{{ section.settings.slickimage03 | img_url:'master' }}">
+                  {% elsif section.settings.slickimage03 == blank %}
+                <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_6-removebg-preview.png?v=1717414487">
+                  {% endif %}
+              </div> 
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
+
+<script>
+  // $('.slick', '.vertical-slider').slick({
+  //   vertical: true,
+  //   verticalSwiping: true,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   dots: true,
+  //   arrows: false,
+  //   autoplay: true
+  // });
+
+  // $(".vertical-slider").on('mousewheel', function(e) {
+  //   e.preventDefault();
+  //   var deltaY = e.originalEvent.deltaY;
+  //   if (deltaY > 0) {
+  //     $(this).slick("slickNext");
+  //   } else {
+  //     $(this).slick("slickPrev");
+  //   }
+  // });
+
+  var slider = $(".slick");
+slider
+  .slick({
+    dots: true,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    arrows: false,
+    autoplay: true
+  });
+
+slider.on('wheel', (function(e) {
+  e.preventDefault();
+
+  if (e.originalEvent.deltaY < 0) {
+    $(this).slick('slickNext');
+  } else {
+    $(this).slick('slickPrev');
+  }
+}));
+
+  let button = document.querySelectorAll(".slick-dots button");
+  for (let i = 0; i <= button.length; i++) {
+    button[i].innerHTML = "";
+  }
+</script>
+
+{% schema %}
+{
+  "name": "H_slider_slideshow",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "slickimage01",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "slickimage02",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "slickimage03",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "slicksectiontext",
+      "label": "Add Text"
+    },
+    {
+      "type": "text",
+      "id": "slicksectionbtn",
+      "label": "Add Text"
+    },
+    {
+      "type": "url",
+      "id": "slicksectionbtnurl",
+      "label": "Add Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "H_slider_slideshow"
+    }
+  ]
+}
+{% endschema %}

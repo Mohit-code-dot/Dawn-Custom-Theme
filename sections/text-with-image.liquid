@@ -1,0 +1,259 @@
+<style>
+   #ContentWrapper a{
+      margin:3rem 2rem 2rem 0!important;
+    }
+  @media(min-width:1280px){
+    #ContentWrapper a{
+      margin:3rem 2rem 2rem 0!important;
+    }
+  }
+  @media(max-width:767px){
+  #TextWithImageWidthWrapper{
+    flex-direction:column;
+    padding:2rem 0;
+  }
+  #CustomVideoWrapper{
+    width:100%!important;
+    padding:2rem!important;
+    justify-content:center!important;
+  } 
+  #ContentWrapper{
+    width:100%!important;
+    padding:2rem 0;
+    align-items: center;
+  } 
+    #icon-text-rapper {
+      width:100%!important;
+      padding:2rem!important;
+    }
+    #icon-text-heading{
+       font-size:14px!important;
+    }
+    #icon-text p{
+      font-size: 12px!important;
+      margin:0;
+    }
+    #ContentWrapper a{
+      width:100%;
+      padding-left:5rem;
+      margin:0!important;
+    }
+     #contentheading p,#contentheading h1,#contentheading h2,#contentheading h3,#contentheading h4,#contentheading h5,#contentheading h6{
+      margin:0!important;
+      padding: 0!important;
+    }
+    #contentheading:after {
+    bottom: -4px!important;
+     }
+  }
+</style>
+<div id="TextWithImageWidthWrapper" style="display:flex;justify-content:space-evenly;align-items:center;background:#FEF5E6;">
+  {% for block in section.blocks %}
+    {% case block.type %}
+
+      {% when 'customvideo' %}
+        <div id="CustomVideoWrapper" style="width:50%;display:flex;justify-content:flex-end;align-items:center;padding:5rem;">
+           {% if block.settings.videolink != blank %}
+           <img style="border-radius:15px;" src="{{ block.settings.videolink | img_url : 'master' }}" width="80%" height="80%">
+           {% elsif block.settings.videolink == blank %}
+           <img style="border-radius:15px;" src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_5.png?v=1717413393" width="80%" height="80%">
+            {% endif %}
+        </div>
+
+      {% when "content" %}
+      <style>
+        #icon-text-heading{
+          font-size:{{ block.settings.contentfontsize }}px;
+        }
+        #icon-text p{
+          font-size: {{block.settings.descfontsize}}px;
+          margin:0;
+        }
+        #icon-text-rapper{
+          display:flex;
+          align-items:center;
+          width:70%;
+          padding:1rem 0;
+        }
+         #contentheading p,#contentheading h1,#contentheading h2,#contentheading h3,#contentheading h4,#contentheading h5,#contentheading h6{
+          color:{{ block.settings.contentheadingcolor }};
+          padding: 0 0 4rem 0;
+          text-align:left;
+        }
+        #icon-image{
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          padding:0 2rem;
+        }
+        #contentheading:after {
+           content: "";
+           position: absolute;
+           left: 0px;
+           width: 100%;
+           bottom: 3.5rem;
+           height: 10px;
+           background-repeat: no-repeat;
+           background-image: url("https://originnutrition.in/wp-content/themes/origin/images/assets/fancy-underline-orange.svg");
+           background-position: left bottom;
+        }
+      </style>
+      <div id="ContentWrapper" style="width:50%;display:flex;flex-direction:column;"> 
+         <div id="contentheading" style="position:relative;">{{ block.settings.contentheading }}</div>
+        <div id="icon-text-rapper">
+          <div id="icon-image"><img src="{{ block.settings.icon01 | img_url:'master' }}" width="60" height="60"></div>
+          <div id="icon-text">
+            <div id="icon-text-heading">{{ block.settings.text01 }}</div>
+            <div><p>{{ block.settings.para01 }}</p></div>
+          </div>
+        </div>
+        <div id="icon-text-rapper">
+          <div id="icon-image"><img src="{{ block.settings.icon02 | img_url:'master' }}" width="60" height="60"></div>
+          <div id="icon-text">
+            <div id="icon-text-heading">{{ block.settings.text02 }}</div>
+            <div><p>{{ block.settings.para02 }}</p></div>
+          </div>
+        </div>
+        <div id="icon-text-rapper">
+          <div id="icon-image"><img src="{{ block.settings.icon03 | img_url:'master' }}" width="60" height="60"></div>
+          <div id="icon-text">
+            <div id="icon-text-heading">{{ block.settings.text03 }}</div>
+            <div><p>{{ block.settings.para03 }}</p></div>
+          </div>
+        </div>
+        <a style="margin-top:5rem;font-size:{{ block.settings.buttonfontsize }}px;color:{{ block.settings.buttoncolor }};" href="{{ block.settings.buttonurl }}">{{ block.settings.buttontext }}</a>
+      </div>
+    {% endcase %}
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "text-with-image",
+    "settings": [],
+    "blocks" : [
+      {
+        "type" : "customvideo",
+        "name" : "Add Image",
+        "settings" : [
+          {
+            "type" : "image_picker",
+            "id" : "videolink",
+            "label" : "Add Link Url Here"
+          }
+        ]
+      },
+      {
+        "type" : "content",
+        "name" : "Add Content",
+        "settings" : [
+          {
+            "type" : "richtext",
+            "id" : "contentheading",
+            "label" : "Add Heading"
+          },
+          {
+            "type" : "color",
+            "id" : "contentheadingcolor",
+            "label" : "Heading Color"
+          },
+          {
+            "type" : "image_picker",
+            "id" : "icon01",
+            "label" : "Icon 1"
+          },
+          {
+            "type" : "text",
+            "id" : "text01",
+            "label" : "Text 1"
+          },
+          {
+            "type" : "text",
+            "id" : "para01",
+            "label" : "Description 1"
+          },
+          {
+            "type" : "image_picker",
+            "id" : "icon02",
+            "label" : "Icon 2"
+          },
+          {
+            "type" : "text",
+            "id" : "text02",
+            "label" : "Text 2"
+          },
+          {
+            "type" : "text",
+            "id" : "para02",
+            "label" : "Description 2"
+          },
+          {
+            "type" : "image_picker",
+            "id" : "icon03",
+            "label" : "Icon 3"
+          },
+          {
+            "type" : "text",
+            "id" : "text03",
+            "label" : "Text 3"
+          },
+          {
+            "type" : "text",
+            "id" : "para03",
+            "label" : "Description 3"
+          },
+          {
+            "type" : "text",
+            "id" : "buttontext",
+            "label" : "Button Text"
+          },
+          {
+            "type" : "url",
+            "id" : "buttonurl",
+            "label" : "Button Url"
+          },
+          {
+            "type" : "range",
+            "id" : "buttonfontsize",
+            "label" : "Button Font Size",
+            "min" : 10,
+            "max" : 30,
+            "unit" : "px",
+            "step" : 1,
+            "default" : 16
+          },
+          {
+            "type" : "color",
+            "id" : "buttoncolor",
+            "label" : "Button Text Color"
+          },
+          {
+            "type" : "range",
+            "id" : "contentfontsize",
+            "label" : "Text Font Size",
+            "min" : 10,
+            "max" : 30,
+            "unit" : "px",
+            "step" : 1,
+            "default" : 16
+          },
+          {
+            "type" : "range",
+            "id" : "descfontsize",
+            "label" : "Description Font Size",
+            "min" : 10,
+            "max" : 30,
+            "unit" : "px",
+            "step" : 1,
+            "default" : 16
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "text-with-image",
+        "category" : "text-with-image"
+      }
+    ]
+  }
+{% endschema %}

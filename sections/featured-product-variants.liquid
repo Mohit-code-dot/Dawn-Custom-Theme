@@ -1,0 +1,468 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- Demo styles -->
+<style>
+   #featured_heading{
+     text-align:center;
+   }
+   #featured_heading h2{
+     font-size: 4rem;
+     font-weight: 800;
+     margin:0;
+   }
+   #featured_heading p{
+     font-size:2rem;
+     font-weight:500;
+   }
+   #featured_product_variants_wrapper{
+     padding:4rem 0;
+     position:relative;
+     background:{{section.settings.featured_product_section_color}};
+   }
+   #featured_product_variants_wrapper a:after{
+     content:'';
+     position:absolute;
+     top:0;
+     left:0;
+     width:100%;
+     height:100%;
+   }
+   #featured_product_variants_wrapper .featured_variants_anchor_btn{
+    text-decoration:none;
+    padding:1rem 3rem;
+    border-radius:30px;
+    background:#000;
+    color:#fff;
+    z-index:99999;
+    cursor:pointer;
+    position:relative;
+    border:none;
+    margin-top:10px;
+  }
+</style>
+<section>
+  {% assign productname = section.settings.featured_prod %}
+  <div id="featured_product_variants_wrapper">
+    <div id="featured_heading">
+      <h2>{{ section.settings.featured_prod_heading }}</h2>
+      <p>{{ section.settings.featured_sub_heading }}</p>
+    </div>
+    {% if section.settings.featured_prod_layout == 'carousel' %}
+      <style>
+          #featured_product_variants_wrapper .swiper {
+          width: 95%;
+          height: 100%;
+        }
+        .mySwiper_featured_Variants p{
+          margin:0;
+        }
+         #featured_product_variants_wrapper .swiper-slide img{
+          width:100%;
+          border-radius:30px;
+        }
+        #featured_product_variants_wrapper .swiper-slide {
+          text-align: center;
+          position:relative;
+          font-size: 18px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction:column;
+          padding:0 0 2.5rem 0;
+          margin-bottom:10rem;
+          {% if section.settings.featured_Display_enable %}
+          background: {{section.settings.featured_product_card_color}};
+          {% endif %}
+          border-radius:30px;
+        }
+        #product_vartiant_swiper_arrow{
+          position: absolute;
+          bottom: 2%;
+          left: 46%;
+          z-index: 9;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 120px;
+          }
+        .product_vartiant_swiper-button-next{
+          transform: rotate(180deg);
+        }
+        .product_vartiant_swiper-button-next, .product_vartiant_swiper-button-prev {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width:55px;
+          height:55px;
+          border-radius: 50%;
+        }
+        .product_vartiant_swiper-button-next img, .product_vartiant_swiper-button-prev img{
+          width:100%;
+        }
+        #featured_product_variants_wrapper .swiper-wrapper{
+          justify-content:{{section.settings.featured_pro_carousel_Slideshow_focus}};
+        }
+        .product_vartiant_swiper-pagination-wrapper{
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          position: absolute;
+          bottom: 2%;
+          left: 52%;
+        }
+        @media(max-width:767px){
+          #product_vartiant_swiper_arrow{
+             bottom: 5%;
+             left: 35%;
+          }
+          #featured_product_variants_wrapper .swiper-slide img{
+          width:100%;
+        }
+          #featured_product_variants_wrapper .swiper-slide{
+            font-size:12px;
+            font-weight:800;
+          }
+          {% if section.settings.featured_pro_carousel_Mobile_slide_width == '1' %}
+          #featured_product_variants_wrapper .swiper-wrapper{
+          justify-content:flex-start;
+           }
+            #featured_product_variants_wrapper .swiper {
+              width: 75%;
+             }
+            {% elsif section.settings.featured_pro_carousel_Mobile_slide_width == '2' %}
+            #featured_product_variants_wrapper .swiper-wrapper{
+          justify-content:flex-start;
+        }
+            #featured_Variants_image_wrapper{
+            padding:1.5rem!important;
+              width:90%;
+          }
+          #featured_product_variants_wrapper .swiper-slide{
+            border-radius:8px;
+          }
+          #featured_product_variants_wrapper .swiper-slide img{
+          border-radius:8px;
+        }
+          {% endif %}
+        }
+      </style>
+      <div class="swiper mySwiper_featured_Variants">
+        <div class="swiper-wrapper">
+          {% for product in section.settings.featured_prod.variants limit: section.settings.featured_var_limit %}
+            <div class="swiper-slide">
+              <a href="{{ product.url }}"></a>
+              <div id="featured_Variants_image_wrapper" style="padding:2.5rem;width:90%;">
+                {% if product.featured_image != blank %}
+                <img src="{{ product.featured_image | img_url:'master' }}" width="100%"/>
+                {% else %}
+                <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_3.png?v=1717412442" width="100%"/>
+                {% endif %}
+              </div>
+              <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
+                <p>{{ productname.title }}</p>
+                <p>{{ product.title }}</p>
+                <p>{{ product.price | money_with_currency }}</p>
+                {% if section.settings.featured_btn_enable %}
+                  <div id="featured_variants_anchor">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.id }}">
+                      <input type="submit" value="Add To Cart" class="featured_variants_anchor_btn">
+                    </form>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        {% if section.settings.carousel_pagination_option == 'arrows' %}
+          <div id="product_vartiant_swiper_arrow">
+            <div class="product_vartiant_swiper-button-next">
+              <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+            </div>
+            <div class="product_vartiant_swiper-button-prev">
+              <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+            </div>
+          </div>
+        {% elsif section.settings.carousel_pagination_option == 'dots' %}
+          <div class="product_vartiant_swiper-pagination-wrapper">
+            <div class="product_vartiant_swiper-pagination"></div>
+          </div>
+        {% endif %}
+      </div>
+    {% elsif section.settings.featured_prod_layout == 'grid' %}
+      <style>
+          #Product_Variant_Grid{
+          width:100%;
+          display:grid;
+        }
+        #Product_Variant_Grid_Card img{
+          border-radius:25px;
+        }
+        .Product_Variant_Grid03{
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        .Product_Variant_Grid04{
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+        .Product_Variant_Grid05{
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+        #Product_Variant_Grid p{
+          margin:0;
+        }
+        #Product_Variant_Grid_Card{
+          margin:1rem;
+          position:relative;
+          {% if section.settings.featured_Display_enable %}
+            padding:3rem;
+            background:{{section.settings.featured_product_card_color}};
+            border-radius:30px;
+          {% endif %}
+        }
+          @media(max-width:767px){
+            {% if section.settings.featured_prod_per_row_on_mobile == '1' %}
+              #Product_Variant_Grid{
+                flex-direction:column;
+              }
+              .Product_Variant_Grid03{
+               grid-template-columns: 1fr;
+               }
+              .Product_Variant_Grid04{
+               grid-template-columns: 1fr;
+               }
+               .Product_Variant_Grid05{
+                grid-template-columns: 1fr;
+               }
+              {% elsif section.settings.featured_prod_per_row_on_mobile == '2' %}
+              #Product_Variant_Grid {
+                flex-wrap:wrap;
+              }
+              .Product_Variant_Grid03{
+               grid-template-columns: 1fr 1fr;
+               }
+              .Product_Variant_Grid04{
+               grid-template-columns: 1fr 1fr;
+               }
+               .Product_Variant_Grid05{
+                grid-template-columns: 1fr 1fr;
+               }
+              #Product_Variant_Grid_Card img{
+                border-radius:8px;
+              }
+              #Product_Variant_Grid_Card{
+                border-radius:8px;
+              }
+              #Product_Variant_Grid_Card{
+                margin:1rem;
+                padding:1rem;
+              }
+            {% endif %}
+          }
+      </style>
+      <div
+        id="Product_Variant_Grid"
+        class="Product_Variant_Grid0{{ section.settings.featured_Products_per_row_on_desktop }}"
+      >
+        {% for product in section.settings.featured_prod.variants limit: section.settings.featured_var_limit %}
+          <div id="Product_Variant_Grid_Card">
+            <a href="{{ product.url }}"></a>
+            <div>
+              <img src="{{ product.featured_image | img_url:'master' }}" width="100%">
+            </div>
+            <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
+              <p>{{ productname | truncate: 20 }}</p>
+              <p>{{ product.title }}</p>
+              <p>{{ product.price | money_with_currency }}</p>
+              {% if section.settings.featured_btn_enable %}
+                <div id="featured_variants_anchor">
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ product.id }}">
+                    <input type="submit" value="Add To Cart" class="featured_variants_anchor_btn">
+                  </form>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper_featured_Variants", {
+    slidesPerView: {{ section.settings.featured_pro_carousel_Mobile_slide_width }},
+    spaceBetween: 10,
+    loop:true,
+    navigation: {
+      nextEl: ".product_vartiant_swiper-button-next",
+      prevEl: ".product_vartiant_swiper-button-prev",
+    },
+    pagination: {
+        clickable: true,
+        el: ".product_vartiant_swiper-pagination",
+      },
+    breakpoints: {
+          768: {
+            slidesPerView: {{ section.settings.featured_Products_per_row_on_desktop }},
+            spaceBetween: 20,
+          },
+        },
+  });
+</script>
+{% schema %}
+{
+  "name": "Featured Product Variants",
+  "settings": [
+    {
+      "type": "text",
+      "id": "featured_prod_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "featured_sub_heading",
+      "label": "Subheading"
+    },
+    {
+      "type": "product",
+      "id": "featured_prod",
+      "label": "Product"
+    },
+    {
+      "type": "range",
+      "id": "featured_var_limit",
+      "max": 50,
+      "min": 4,
+      "step": 1,
+      "label": "Variant limit",
+      "default" : 25
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_btn_enable",
+      "info": "If a product only has two variants buttons will be shown",
+      "label": "Enable Add To Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_Display_enable",
+      "label": "Display on card"
+    },
+    {
+      "type": "radio",
+      "id": "featured_prod_layout",
+      "label": "Layout",
+      "options": [
+        {
+          "label": "Grid",
+          "value": "grid"
+        },
+        {
+          "label": "Carousel",
+          "value": "carousel"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Grid",
+      "info": "These settings only apply when layout is set to grid."
+    },
+    {
+      "type": "radio",
+      "id": "featured_prod_per_row_on_mobile",
+      "label": "Products per row on mobile",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "featured_Products_per_row_on_desktop",
+      "label": "Products per row on desktop",
+      "max": 5,
+      "min": 3,
+      "step": 1,
+      "default" : 3
+    },
+    {
+      "type": "header",
+      "content": "Carousel",
+      "info": "These settings only apply when layout is set to grid."
+    },
+    {
+      "type": "radio",
+      "id": "carousel_pagination_option",
+      "label": "Carousel Pagination",
+      "options": [
+        {
+          "label": "Dots",
+          "value": "dots"
+        },
+        {
+          "label": "Arrows",
+          "value": "arrows"
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "featured_pro_carousel_Slideshow_focus",
+      "label": "Slideshow focus",
+      "options": [
+        {
+          "label": "Left",
+          "value": "flex-start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        }
+      ],
+      "default" : "center"
+    },
+    {
+      "type": "radio",
+      "id": "featured_pro_carousel_Mobile_slide_width",
+      "label": "Mobile slide width",
+      "options": [
+        {
+          "label": "Three fifths",
+          "value": "2"
+        },
+        {
+          "label": "Full Width",
+          "value": "1"
+        }
+      ],
+      "default" : "1"
+    },
+    {
+      "type": "color",
+      "id": "featured_product_section_color",
+      "label": "Section Color"
+    },
+    {
+      "type": "color",
+      "id": "featured_product_card_color",
+      "label": "card Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product Variants"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,234 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+>
+<style>
+    #designcardWrapper{
+      width:90%;
+      margin:0 auto;
+      height:100%;
+      /* background:red; */
+    }
+    #designcardheading h1 span{
+      color:rgb(156, 87, 85);
+    }
+    #designcardheading h1{
+      font-weight: 800;
+      font-size: 5rem;
+      letter-spacing: -3px;
+      color: #101010;
+      margin: 0;
+      padding: 0;
+      word-spacing: 8px;
+    }
+     #designcardWrapper .swiper img{
+       border-radius:30px;
+     }
+     #designcardWrapper .swiper {
+        width: 80%;
+        height: 100%;
+        overflow:visible!important;
+        margin-left:0!important;
+      }
+     #designcardWrapper .swiper-slide:hover{
+        box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.12);
+        transform: scale(1.02);
+       cursor:grab;
+     }
+     #designcardWrapper .swiper-slide {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        transition:all .5s;
+        background-position:center;
+        background-size:cover;
+        height:90vh;
+        border-radius:30px;
+        margin:2rem 0;
+      }
+    #badgeWrapper p{
+      position: absolute;
+      top: 3%;
+      left: 3%;
+      padding: 0px 8px;
+      color: rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(20px);
+      border-radius: 14px;
+      font-weight:800;
+    }
+    #designcardtext{
+      padding: 0 3rem;
+      /* background:green; */
+      display: flex;
+      flex-direction:column;
+    }
+    #designcardtext h2{
+      margin:0;
+      padding:0;
+      color:#fff;
+      font-weight:800;
+      font-size:3rem;
+    }
+    #designcardtext a:after{
+      content:"";
+      position:absolute;
+      width:100%;
+      height:100%;
+      /* background:red; */
+      top:0;
+      left:0;
+    }
+    #designcardtext a{
+      text-decoration:none;
+      color:#000;
+      background:#fff;
+      padding: 1.2rem 3rem;
+      font-weight:800;
+      border-radius:30px;
+      margin:2rem 0;
+    }
+
+    @media(max-width:767px){
+      #designcardtext{
+        width:100%;
+        padding:0 1rem;
+      }
+      #designcardWrapper .wrapper .carousel {
+      grid-auto-columns: 97%;
+      margin: 3rem 0rem 5rem 2rem;
+      }
+      #designcardWrapper .swiper-slide{
+        height:50vh;
+      }
+      #designcardtext a{
+        text-align:center
+      }
+      #designcardtext h2{
+        font-size:2rem;
+      }
+      #badgeWrapper p{
+        font-size:1rem;
+      }
+      #designcardheading h1 {
+      font-size: 2rem;
+      letter-spacing: -1px;
+      word-spacing: 4px;
+  }
+    }
+    @media(min-width:1920px){
+      #designcardWrapper .swiper-slide{
+        height:70vh;
+      }
+    }
+</style>
+<section style="overflow:hidden;padding:4rem 0;">
+  <div id="designcardWrapper">
+    <div id="designcardheading">
+      <h1>{{ section.settings.designcardsectionheading }}</h1>
+    </div>
+    <div class="swiper mySwipercard">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div
+            class="swiper-slide"
+            style="position:relative;
+            {% if block.settings.designcardimage != blank %}
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url({{ block.settings.designcardimage | img_url:'master'}});
+            {% elsif block.settings.designcardimage == blank %}
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_4.png?v=1717412781');
+            {% endif %}
+            "
+          >
+            <div id="badgeWrapper">
+              <p>{{ block.settings.designcardbadge }}</p>
+            </div>
+            {% if block.settings.designcardtext != blank %}
+              <div id="designcardtext">
+                <h2>{{ block.settings.designcardtext }}</h2>
+                <a href="{{ block.settings.designcardbtnurl }}">{{ block.settings.designcardbtntext }}</a>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ 'swiper.js' | asset_url | script_tag }}
+<script>
+  var mySwipercard = new Swiper(".mySwipercard", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        1920: {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        },
+      },
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Design Card",
+  "settings": [
+    {
+      "type" : "text",
+      "id" : "designcardsectionheading",
+      "label": "Section Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type" : "text",
+      "name" : "Add Block",
+      "settings": [
+        {
+      "type": "image_picker",
+      "id" : "designcardimage",
+      "label" : "Add Image"
+       },
+       {
+      "type": "text",
+      "id" : "designcardbadge",
+      "label" : "Add Badge"
+       },
+       {
+      "type": "text",
+      "id" : "designcardtext",
+      "label" : "Add Text"
+       },
+       {
+      "type" : "text",
+      "id" : "designcardbtntext",
+      "label" : "Button Text"
+       },
+       {
+      "type" : "url",
+      "id" : "designcardbtnurl",
+      "label" : "Button Url"
+       }
+     ]
+    }
+  ],
+  "presets": [
+    {
+      "name" : "Design Card"
+    }
+  ]
+}
+{% endschema %}

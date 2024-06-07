@@ -1,0 +1,418 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+    #Marquee_Testimonial{
+      height:60vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    #Marquee_Testimonial .marquee {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow: hidden;
+  }
+
+  #Marquee_Testimonial .track {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 7s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-20%); }
+  }
+    #Marquee_Testimonial .swiper {
+        width: 100%;
+        height: 100%;
+        position:relative;
+      }
+
+      #swiperTestimonial .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor:grab;
+      }
+
+      #swiperTestimonial .swiper-slide #marquee01 img {
+        display: block;
+        width: 100px;
+        height:100px;
+      }
+      #swiperTestimonial .swiper-slide img {
+        display: block;
+        width: 30%;
+        object-fit: cover;
+      }
+    .marqueeShowhide{
+      display:none!important;
+    }
+    .marquee-swiper-button-next{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform:rotate(180deg);
+    }
+    .marquee-swiper-button-next img{
+      width:100%;
+    }
+    .marquee-swiper-button-prev{
+      width:50px;
+      height:50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius:50%;
+    }
+    .marquee-swiper-button-prev img{
+      width:100%;
+    }
+   #cursor{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: white;
+      border-radius: 50%;
+      background:#000;
+      /* mix-blend-mode: difference; */
+      pointer-events: none;
+      transition: all 0s ease-in-out;
+      z-index:99;
+     }
+     #marquee-swiper-button-wrapper{
+        display:none;
+        justify-content:space-between;
+        align-items:center;
+        position:absolute;
+        right:5%;
+        bottom:0%;
+        z-index:99999;
+        width:90px;
+     }
+    }
+    @media(max-width:767px){
+      .marquee-swiper-button-next{
+      width:40px;
+      height:40px;
+      }
+      #marquee-swiper-button-wrapper{
+        display:flex;
+      }
+      #cursor{
+        display:none;
+      }
+    .marquee-swiper-button-next img{
+      width:80%;
+    }
+    .marquee-swiper-button-prev{
+      width:40px;
+      height:40px;
+    }
+    .marquee-swiper-button-prev img{
+      width:80%;
+    }
+    }
+</style>
+<section id="Marquee_Testimonial" 
+  onmouseover="marqueefunction()" 
+  onmouseleave="swiperfunction()" 
+  ontouchstart="disableCursor()" 
+  ontouchmove="disableCursor()"
+  ontouchend="disableCursor()"
+  >
+  <div class="marquee">
+    <div class="track">
+      <div class="content">
+        <div style="display:flex;align-items:center;justify-content:space-evenly;">
+          {% for block in section.blocks %}
+            <div id="Marquee_Testimonial_Wrapper">
+              <div id="marquee01" style="display:flex;align-items:center;justify-content:center;">
+                {% if block.settings.marqueeImage != blank %}
+                  <img
+                    src="{{ block.settings.marqueeImage | img_url:'master' }}"
+                    width="100px"
+                    height="100px"
+                    style="border-radius:15px;"
+                  >
+                {% elsif block.settings.marqueeImage == blank %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378"
+                    width="100px"
+                    height="100px"
+                    style="border-radius:15px;"
+                  >
+                {% endif %}
+              </div>
+              <div id="marquee02" style="width:100%;text-align:center;height:40px;" ;>
+                {% if block.settings.marqueestar == '1 Star' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/star_2.png?v=1713870404"
+                    width="80px"
+                    height="80px"
+                  >
+                {% elsif block.settings.marqueestar == '2 Star' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/two.png?v=1713870404"
+                    width="80px"
+                    height="80px"
+                  >
+                {% elsif block.settings.marqueestar == '3 Star' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/three.png?v=1713870404"
+                    width="80px"
+                    height="80px"
+                  >
+                {% elsif block.settings.marqueestar == '4 Star' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/star_3.png?v=1713870403"
+                    width="80px"
+                    height="80px"
+                  >
+                {% elsif block.settings.marqueestar == '5 Star' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/rating.png?v=1713870404"
+                    width="80px"
+                    height="80px"
+                  >
+                {% else %}
+                  <img style="display:none;">
+                {% endif %}
+              </div>
+              <div id="marquee03" style="width:250px;text-align:center;white-space: normal;">
+                {{ block.settings.marquee_quote }}
+              </div>
+              <div id="marquee04" style="text-align:center;">{{ block.settings.marquee_source }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper -->
+    <div id="cursor">
+      <h3 style="font-weight:800;z-index:9999;color:#fff;">Drag</h3>
+    </div>
+  <div id="swiperTestimonial" class="swiper swipermarquee marqueeShowhide">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div id="Marquee_Testimonial_Wrapper">
+            <div id="marquee01" style="display:flex;align-items:center;justify-content:center;">
+              {% if block.settings.marqueeImage != blank %}
+                <img
+                  src="{{ block.settings.marqueeImage | img_url:'master' }}"
+                  width="100px"
+                  height="100px"
+                  style="border-radius:15px;"
+                >
+              {% elsif block.settings.marqueeImage == blank %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378"
+                  width="100px"
+                  height="100px"
+                  style="border-radius:15px;"
+                >
+              {% endif %}
+            </div>
+            <div
+              id="marquee02"
+              style="width:100%;text-align:center;height:40px;display: flex;justify-content: center;align-items: center;"
+            >
+              {% if block.settings.marqueestar == '1 Star' %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/star_2.png?v=1713870404"
+                  width="80px"
+                  height="80px"
+                >
+              {% elsif block.settings.marqueestar == '2 Star' %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/two.png?v=1713870404"
+                  width="80px"
+                  height="80px"
+                >
+              {% elsif block.settings.marqueestar == '3 Star' %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/three.png?v=1713870404"
+                  width="80px"
+                  height="80px"
+                >
+              {% elsif block.settings.marqueestar == '4 Star' %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/star_3.png?v=1713870403"
+                  width="80px"
+                  height="80px"
+                >
+              {% elsif block.settings.marqueestar == '5 Star' %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/rating.png?v=1713870404"
+                  width="80px"
+                  height="80px"
+                >
+              {% else %}
+                <img style="display:none;">
+              {% endif %}
+            </div>
+            <div id="marquee03" style="width:290px;text-wrap:wrap;text-align:center;">
+              {{ block.settings.marquee_quote }}
+            </div>
+            <div id="marquee04">{{ block.settings.marquee_source }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div id="marquee-swiper-button-wrapper">
+      <div class="marquee-swiper-button-next">
+        <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+      </div>
+      <div class="marquee-swiper-button-prev">
+        <img src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-right.png?v=1714565384">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swipermarquee = new Swiper(".swipermarquee", {
+      slidesPerView: 5,
+      spaceBetween: 20,
+      loop:true,
+      navigation: {
+        nextEl: ".marquee-swiper-button-next",
+        prevEl: ".marquee-swiper-button-prev",
+      },
+      breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+    480: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+    640: {
+      slidesPerView: 4,
+      spaceBetween: 20
+    },
+    1280: {
+      slidesPerView: 4,
+      spaceBetween: 20
+    }
+  }
+    });
+
+    var swiperTestimonial = document.getElementById("swiperTestimonial");
+    var MarqueeTestimonial = document.querySelector(".marquee");
+    var cursor = document.querySelector("#cursor");
+
+      cursor.classList.add("marqueeShowhide");
+    function swiperfunction(){
+      swiperTestimonial.classList.add("marqueeShowhide");
+      cursor.classList.add("marqueeShowhide");
+      MarqueeTestimonial.classList.remove("marqueeShowhide");
+    }
+    function marqueefunction(){
+      swiperTestimonial.classList.remove("marqueeShowhide");
+      cursor.classList.remove("marqueeShowhide");
+      MarqueeTestimonial.classList.add("marqueeShowhide");
+    }
+
+  function disableCursor(){
+    cursor.style.display = "none"
+  }
+  var Marquee_Testimonial = document.getElementById("swiperTestimonial");
+  Marquee_Testimonial.addEventListener("mousemove", function(event) {
+  const Marquee_Testimonial_x = event.pageX - 80;
+  const Marquee_Testimonial_y = event.pageY - 80;
+  // const cursor = document.querySelector("#cursor");
+  cursor.style.left = Marquee_Testimonial_x + "px";
+  cursor.style.top = Marquee_Testimonial_y + "px";
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "Marquee_With_slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "text",
+      "name" : "Add Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "marqueeImage",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "marqueestar",
+          "label": "Rating",
+          "options": [
+            {
+              "label": "No Star",
+              "value": "No Star"
+            },
+            {
+              "label": "1 Star",
+              "value": "1 Star"
+            },
+            {
+              "label": "2 Star",
+              "value": "2 Star"
+            },
+            {
+              "label": "3 Star",
+              "value": "3 Star"
+            },
+            {
+              "label": "4 Star",
+              "value": "4 Star"
+            },
+            {
+              "label": "5 Star",
+              "value": "5 Star"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "marquee_quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "marquee_source",
+          "label": "Source"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee_With_slider"
+    }
+  ]
+}
+{% endschema %}

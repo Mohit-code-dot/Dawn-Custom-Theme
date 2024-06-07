@@ -1,0 +1,574 @@
+<style>
+    #DesktopScreen{
+      display:flex;
+      flex-direction:column;
+    }
+    .fullWidth{
+      width:100%;
+    }
+    .fullWidthWithPadded{
+      width:90vw;
+      margin:0 auto;
+      padding:0 20px;
+    }
+    .pageWidth{
+      width:1200px;
+      margin:0 auto;
+    }
+  #testing{
+    position:relative;
+    margin:0 2rem;
+    width:50%;
+  }
+  #testing img{
+    width:100%;
+  }
+  .SwiperWrapper{{ section.id }}{
+    display:flex;
+    justify-content:{{ section.settings.SwiperAlignment }};
+    align-items:center;
+    width:100%;
+    overflow:hidden;
+    gap:0 1rem;
+  }
+  .CollectionListSwiper{{ section.id }}{
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        position:relative;
+  }
+
+    @media(max-width:767px){
+    .SwiperWrapper{{ section.id }}{
+      max-width:350px!important;
+    }
+    #Right {
+      position: relative !important;
+      right: -8% !important;
+      bottom: 0!important;
+  }
+    #Left {
+      position: absolute !important;
+      left: 37% !important;
+      bottom: 0%!important;
+  }
+    #SwiperImage{
+      width:350px;
+      height:350px;
+    }
+    #testing h3{
+      margin-left:0!important;
+      text-align:center;
+    }
+      {% if section.settings.MobileColumn == 'TwoColumn' %}
+    #SwiperImage{
+      width:{{350 | divided_by: 2}}px;
+      height:{{350 | divided_by: 2}}px;
+    }
+    .SwiperWrapper{{ section.id }}{
+      max-width:92%!important;
+    }
+        {% endif %}
+      }
+</style>
+<section
+  class="{% if section.settings.sectionWidth == "FirstWidth" %}fullWidth{% endif %}{% if section.settings.sectionWidth == "SecondWidth" %}fullWidthWithPadded{% endif %}{% if section.settings.sectionWidth == 'ThirdWidth' %}pageWidth{% endif %}"
+  style="background:{{ section.settings.Section_BgColor }};padding-top:{{ section.settings.sectionPaddingTop }}px;padding-bottom:{{ section.settings.sectionPaddingBottom }}px"
+>
+  <!-- Desktop Section -->
+
+  {% if section.settings.sectionLayout == 'carousel' %}
+    <div
+      class="CollectionListSwiper{{ section.id }}"
+      id="DesktopScreen"
+    >
+      <h2 class="center" style="font-size:{{ section.settings.headingSize }}px;font-weight:700;">
+        {{ section.settings['Collection-Heading'] }}
+      </h2>
+      <!-- <i id="Left" class="fa-solid fa-arrow-left" style="z-index:1;"></i> -->
+      <img
+        id="Left"
+        style="z-index:1;transform: rotate(180deg);"
+        class="fa-solid"
+        width="20px"
+        height="20px"
+        src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/icon-chevron-right.svg?v=1709103910"
+      >
+      <div
+        class="SwiperWrapper{{ section.id }}"
+      >
+        {%- for block in section.blocks -%}
+          <style>
+              div:empty{
+                display:block!important;
+              }
+            .CollectionListSwiper{{ section.id }} .fa-solid{
+              background:#fff;
+              width:45px;
+              height:45px;
+              border-radius:50%;
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              margin:1rem;
+              padding:1rem;
+              cursor:pointer;
+            }
+            {% if section.blocks.size < 4 %}
+              #Right{
+              display:none!important;
+            }
+            #Left{
+              display:none!important;
+            }
+            {% endif %}
+
+            @media(min-width:768px){
+
+            #Right{
+              position:absolute;
+              right:2%;
+              top:50%;
+            }
+            #Left{
+              position:absolute;
+              left:2%;
+              top:50%;
+            }
+            }
+            .SwiperWrapper{{ section.id }}.dragging{
+              scroll-behavior:auto;
+              cursor:grab;
+            }
+            .SwiperWrapper{{ section.id }}{
+              scroll-behavior:smooth;
+            }
+          </style>
+
+          <div id="testing">
+            {% assign collection = collections[block.settings.SwiperCollection] %}
+            <a href="{{ collection.url }}" style="text-decoration:none;">
+              <!--
+                width="{{ section.settings.SwiperImgWidth }}"
+                height="{{ section.settings.SwiperImgHeight }}"
+              -->
+
+              {% if block.settings.CollectionListSwiperImg != blank %}
+              <img
+                width=""
+                height=""
+                src="{{ block.settings.CollectionListSwiperImg | img_url:'master' }}"
+                style="border-radius:{{ section.settings.swiperImgShape }};"
+                id="SwiperImage"
+                draggable="false"
+              >
+                {% elsif block.settings.CollectionListSwiperImg == blank %}
+              <img
+                width=""
+                height=""
+                src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378"
+                style="border-radius:{{ section.settings.swiperImgShape }};"
+                id="SwiperImage"
+                draggable="false"
+              >
+              {% endif %}
+              {% if section.settings.textOverlay != blank %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);">
+                  {{ collection.title }}
+                </h3>
+              {% else %}
+                <h3 style="margin-left: 6rem;font-size:{{ section.settings.TextSize }}px;">
+                  {{ collection.title }}
+                </h3>
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- <i id="Right" class="fa-solid fa-arrow-right" style="z-index:1;"></i> -->
+      <img
+        id="Right"
+        style="z-index:1;"
+        class="fa-solid"
+        width="20px"
+        height="20px"
+        src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/icon-chevron-right.svg?v=1709103910"
+      >
+    </div>
+  {% else %}
+    <div
+      class="CollectionListSwiper{{ section.id }}"
+      id="DesktopScreen"
+      style="position:relative;"
+    >
+      <h2 class="center" style="font-size:{{ section.settings.headingSize }}px;font-weight:700;">
+        {{ section.settings['Collection-Heading'] }}
+      </h2>
+      <div
+        class="GridWrapper{{ section.id }}"
+        style="display:flex;justify-content:{{ section.settings.SwiperAlignment }};align-items:center;max-width:100%;flex-wrap: wrap;gap:2rem;"
+      >
+        {%- for block in section.blocks -%}
+          <style>
+            div:empty{
+              display:block!important;
+            }
+          </style>
+          <div style="position:relative;">
+            {% assign collection = collections[block.settings.SwiperCollection] %}
+            <a
+              href="{{ collection }}"
+              style="text-decoration:none;position:relative;"
+            >
+              <img
+                width=""
+                height=""
+                src="{{ block.settings.CollectionListSwiperImg | img_url:'master' }}"
+                style="border-radius:{{ section.settings.swiperImgShape }};"
+                id="SwiperImage"
+                draggable="false"
+              >
+              {% if section.settings.textOverlay != blank %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);color:{{ section.settings.collectionTitleColor }}">
+                  {{ collection.title }}
+                </h3>
+              {% else %}
+                <h3 style="margin-left: 6rem;font-size:{{ section.settings.TextSize }}px;color:{{ section.settings.collectionTitleColor }}">
+                  {{ collection.title }}
+                </h3>
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+      const carousel = document.querySelector(".SwiperWrapper{{ section.id }}"),
+      firstImg = carousel.querySelectorAll("img")[0],
+      arrowIcons = document.querySelectorAll(".fa-solid");
+
+      let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+
+      arrowIcons.forEach(icon => {
+          icon.addEventListener("click", () => {
+              let firstImgWidth = firstImg.clientWidth + 10; // getting first img width & adding 14 margin value
+
+              // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+              carousel.scrollLeft += icon.id == "Left" ? -firstImgWidth : firstImgWidth;
+
+          });
+      });
+
+    const autoSlide = () => {
+
+      positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+      let firstImgWidth = firstImg.clientWidth + 10;
+      // getting difference value that needs to add or reduce from carousel left to take middle img center
+      let valDifference = firstImgWidth - positionDiff;
+
+      if (carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+        return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+      }
+      // if user is scrolling to the left
+      carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+
+    }
+
+      const dragStart = (e) => {
+          // updatating global variables value on mouse down event
+          isDragStart = true;
+          prevPageX = e.pageX || e.touches[0].pageX;
+          prevScrollLeft = carousel.scrollLeft;
+      }
+
+      const dragging = (e) => {
+          // scrolling images/carousel to left according to mouse pointer
+          if(!isDragStart) return;
+          e.preventDefault();
+          isDragging = true;
+          carousel.classList.add("dragging");
+          positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+          carousel.scrollLeft = prevScrollLeft - positionDiff;
+      }
+
+      const dragStop = () => {
+          isDragStart = false;
+          carousel.classList.remove("dragging");
+
+          if(!isDragging) return;
+          isDragging = false;
+          autoSlide();
+      }
+
+    const infiniteScroll = () => {
+      // If the carousel is at the beginning, scroll to the end
+      if(carousel.scrollLeft === 0) {
+          // carousel.scrollLeft = firstImg;
+          // carousel.scrollLeft = carousel.scrollWidth - (firstImg.length * carousel.offsetWidth);
+      }
+      // If the carousel is at the end, scroll to the beginning
+      else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+         // let Right = document.querySelector("#Right").style.display:none;
+          // carousel.scrollLeft = firstImg[0];
+          // carousel.scrollLeft = carousel.scrollWidth - (firstImg.length * carousel.offsetWidth);
+      }
+  }
+
+      carousel.addEventListener("mousedown", dragStart);
+      carousel.addEventListener("touchstart", dragStart);
+
+      document.addEventListener("mousemove", dragging);
+      carousel.addEventListener("touchmove", dragging);
+
+      document.addEventListener("mouseup", dragStop);
+      carousel.addEventListener("touchend", dragStop);
+
+    carousel.addEventListener("scroll", infiniteScroll);
+</script>
+
+{% schema %}
+{
+  "name": "Collection List Swiper",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Layout"
+    },
+    {
+      "type" : "select",
+      "id" : "sectionLayout",
+      "label" : "Layout",
+      "options" : [
+        {
+          "value" : "grid",
+          "label" : "Grid"
+        },
+        {
+          "value" : "carousel",
+          "label" : "Carousel"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id" : "SwiperAlignment",
+      "label" : "Alignment",
+      "options" : [
+        {
+          "value" : "flex-start",
+          "label" : "Left"
+        },
+        {
+          "value" : "Center",
+          "label" : "Center"
+        },
+        {
+          "value" : "flex-end",
+          "label" : "Right"
+        }
+      ],
+      "default" : "flex-start"
+    },
+    {
+      "type" : "range",
+      "id" : "SwiperImgWidth",
+      "label" : "Width",
+      "max" : 300,
+      "min" : 100,
+      "step" : 25,
+      "unit" : "px",
+      "default" : 100
+    },
+    {
+      "type" : "range",
+      "id" : "SwiperImgHeight",
+      "label" : "Height",
+      "max" : 300,
+      "min" : 100,
+      "step" : 25,
+      "unit" : "px",
+      "default" : 100
+    },
+    {
+      "type" : "select",
+      "id" : "swiperImgShape",
+      "label" : "Image Shape",
+      "options" : [
+        {
+          "value" : "50%",
+          "label" : "Circles"
+        },
+        {
+          "value" : "0%",
+          "label" : "Squares"
+        }
+      ]
+    },
+    {
+      "type" : "header",
+      "content" : "Text"
+    },
+    {
+      "type" : "text",
+      "id" : "Collection-Heading",
+      "label" : "Heading",
+      "default" : "Collection"
+    },
+    {
+      "type" : "range",
+      "id" : "headingSize",
+      "label" : "Collection title size",
+      "max" : 100,
+      "min" : 20,
+      "step" : 5,
+      "unit" : "px",
+      "default" : 20
+    },
+    {
+      "type" : "range",
+      "id" : "TextSize",
+      "label" : "Text size",
+      "max" : 40,
+      "min" : 20,
+      "step" : 2,
+      "unit" : "px",
+      "default" : 20
+    },
+    {
+      "type" : "checkbox",
+      "id" : "textOverlay",
+      "info": "Text over images",
+      "label" : "Overlay Text",
+      "default" : false
+    },
+    {
+      "type" : "header",
+      "content" : "Mobile layout"
+    },
+    {
+      "type" : "select",
+      "id" : "mobileLayout",
+      "label" : "Mobile layout",
+      "options" : [
+        {
+          "value" : "MobileGrid",
+          "label" : "Grid"
+        },
+        {
+          "value" : "MobileCarousel",
+          "label" : "Carousel"
+        }
+      ]
+    },
+     {
+       "type" : "select",
+       "id" : "MobileColumn",
+       "label" : "Column In Mobile",
+       "options" : [
+         {
+           "value" : "TwoColumn",
+           "label" : "2 Column"
+         },
+         {
+           "value" : "OneColumn",
+           "label" : "1 Column"
+         }
+       ]
+     },
+    {
+      "type" : "color",
+      "id" : "Section_BgColor",
+      "label" : "Background"
+    },
+    {
+      "type" : "color",
+      "id" : "collectionTitleColor",
+      "label" : "text Color"
+    },
+    {
+      "type" : "header",
+      "content" : "Section spacing"
+    },
+    {
+      "type" : "select",
+      "id" : "sectionWidth",
+      "label" : "Width",
+      "options" : [
+        {
+          "value" : "FirstWidth",
+          "label" : "Full Width"
+        },
+        {
+          "value" : "SecondWidth",
+          "label" : "Full Width With Padded"
+        },
+        {
+          "value" : "ThirdWidth",
+          "label" : "Page Width"
+        }
+      ]
+    },
+    {
+      "type" : "range",
+      "id" : "sectionPaddingTop",
+      "label" : "Padding top",
+      "max" : 100,
+      "min" : 0,
+      "unit" : "px",
+      "step" : 10,
+      "default" : 20
+    },
+    {
+      "type" : "range",
+      "id" : "sectionPaddingBottom",
+      "label" : "Padding bottom",
+      "max" : 100,
+      "min" : 0,
+      "unit" : "px",
+      "step" : 10,
+      "default" : 20
+    }
+  ],
+  "blocks" : [
+    {
+      "type" : "collection",
+      "name" : "Collection List",
+      "settings" : [
+        {
+          "type" : "collection",
+          "id" : "SwiperCollection",
+          "label" : "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id" : "CollectionListSwiperImg",
+          "label" : "Image"
+        },
+        {
+          "type" : "header",
+          "content" : "Colors"
+        },
+        {
+          "type" : "color",
+          "id" : "SwiperBgColor",
+          "label" : "Background"
+        },
+        {
+          "type" : "color",
+          "id" : "swiperText",
+          "label" : "Text Color"
+        }
+      ]
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "Collection List Swiper",
+      "category" : "Collection"
+    }
+  ]
+}
+{% endschema %}

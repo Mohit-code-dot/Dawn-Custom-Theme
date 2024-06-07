@@ -1,0 +1,244 @@
+<style>
+  #dropdownWrapper{
+    overflow:hidden;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background:#efe3f3;
+    position:relative;
+    height: 85vh;
+  }
+   #dropdownWrapper .marquee {
+    display: flex;
+    height: 30px;
+    margin: -4rem 3rem 0 0;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    background:rgba(215, 64, 21,1);
+    color:#fff;
+  }
+  #dropdownWrapper .marquee-content {
+    display: inline-block;
+    animation: marqueedropdown 120s linear infinite;
+  }
+  #dropdownWrapper .item-collection-1 {
+    position: relative;
+    left: 0%;
+    animation: swap 120s linear infinite;
+  }
+  @keyframes swap {
+    0%, 50% {
+      left: 0%;
+    }
+    50.01%,
+    100% {
+      left: 100%;
+    }
+  }
+  #dropdownWrapper .item1 {
+    display: flex;
+    height: 70px;
+    width: 140px;
+    background: cyan;
+    vertical-align: top;
+    margin-left: 15px;
+  }
+  #dropdownWrapper .item2 {
+    display: flex;
+    height: 70px;
+    width: 100px;
+    background: magenta;
+    vertical-align: top;
+    margin-left: 15px;
+    line-height: 14px;
+  }
+  /* Transition */
+
+  @keyframes marqueedropdown {
+    0% {
+      transform: translateX(0)
+    }
+    100% {
+      transform: translateX(-100%)
+    }
+  }
+
+  #Texthead:hover #Text{
+    height:70px;
+    transition: all .3s linear 0s;
+  }
+  #Texthead{
+    cursor:pointer;
+    transition: all .3s linear 0s;
+    color:rgb(135,38,38);
+    font-size: 3.2rem;
+    width:60%;
+  }
+  #Text{
+    height:0px;
+    overflow:hidden;
+    color:rgb(135,38,38);
+    transition: all .3s linear 0s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height:20px;
+    font-size: 1.4rem;
+    text-align:{{ section.settings.dropdown_text_alignment }};
+  }
+  @media(max-width:767px){
+    #dropdownWrapper{
+      flex-direction:column;
+      height:100%;
+      padding:0 0 1rem 0;
+    }
+    #dropdown01{
+      width:100%!important;
+    }
+    #dropdown01 img{
+      height:90%!important;
+    }
+    #dropdown02{
+      width:133% !important;
+      overflow: hidden;
+      height: 50%;
+      position: absolute;
+      top: -7%;
+      left: 35%;
+    }
+    #dropdown03{
+      width:100%!important;
+      height:380px!important;
+    }
+    #Texthead {
+        text-align: center;
+        width: 100% !important;
+        font-size: 2.5rem !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #Texthead:hover #Text{
+    height:130px!important;
+  }
+    #Text{
+   width:60%
+  }
+  }
+</style>
+
+<section>
+  <div id="dropdownWrapper">
+    <div id="dropdown01" style="width:50%;height:100%;display:flex;">
+      {% if section.settings.dropdown_image != blank %}
+      <img style="obejct-fit:cover;" src="{{ section.settings.dropdown_image | img_url:'master' }}" width="100%" height="100%">
+      {% elsif section.settings.dropdown_image == blank %}
+      <img style="obejct-fit:cover;" src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/svgviewer-png-output_-_5.png?v=1717413393" width="100%" height="100%">
+      {% endif %}
+    </div>
+    <div
+      id="dropdown02"
+      style="width:2%;display:flex;justify-content:center;align-items:center;transform: rotate(270deg);"
+    >
+      <div class="marquee">
+        <div class="marquee-content">
+          <span class="item-collection-1">
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+          </span>
+          <span class="item-collection-2">
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+            <span>#ItsOkToBeSensitive</span>
+            <span>🥹#ItsOkayToBeSensitive🥹</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      id="dropdown03"
+      style="
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      "
+    >
+      {% for block in section.blocks %}
+        <div id="Texthead">
+          {{ block.settings.dropdown_heading }}
+          <div id="Text">{{ block.settings.dropdown_text }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Image With Dropdown",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "dropdown_image",
+      "label": "Add Image"
+    },
+    {
+      "type": "select",
+      "id": "dropdown_text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ],
+      "default" : "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Add Block",
+      "settings" : [
+        {
+          "type": "text",
+          "id": "dropdown_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image With Dropdown"
+    }
+  ]
+}
+{% endschema %}

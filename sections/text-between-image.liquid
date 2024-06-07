@@ -1,0 +1,231 @@
+<style>
+  @media(min-width:1280px){
+    #CustomImageWrapper{
+      width:30%!important;
+    }
+    #CustomTextWrapper{
+      width:25%!important;
+    }
+  }
+   @media(min-width: 800px) and (max-width: 1200px){
+     #CustomImageWrapper img{
+       width:380px!important;
+     }
+   }
+  @media(max-width:767px){
+    #TextBetweenImageWrapper{
+      flex-direction:column;
+      padding:2rem 0;
+    }  
+    #CustomImageWrapper{
+      width:100%!important;
+    }
+    #CustomImageWrapper img{
+      width:100%!important;
+      height:350px!important;
+    }
+    #CustomTextWrapper{
+      width:90%!important;
+      padding:2rem 0;
+    }
+  }
+</style>
+
+<section>
+  <div id="TextBetweenImageWrapper" style="display:flex;justify-content:space-between;align-items:center;position:relative;background:rgba(255,246,224,1);padding:6rem 0;">
+    {% for block in section.blocks %}
+      {% case block.type %}
+
+        {% when 'CustomImage' %}
+          <div id="CustomImageWrapper" style="display:flex;justify-content:{{ block.settings.image_alignment }};align-items:center;width:33%;">
+            {% if block.settings.imageblock != blank %}
+            <img style="border-radius:{{ block.settings.imageradius }};" src="{{ block.settings.imageblock | img_url: 'master'}}" width="{{ block.settings.imageWidth }}" height="{{ block.settings.imageHeight }}">
+            {% elsif block.settings.imageblock == blank %}
+            <img style="border-radius:{{ block.settings.imageradius }};" src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378" width="{{ block.settings.imageWidth }}" height="{{ block.settings.imageHeight }}">
+            {% endif %}
+          </div>
+
+        {% when 'CustomText' %}
+        <style>
+          #descText p,#descText h1,#descText h2,#descText h3,#descText h4,#descText h5,#descText h6{
+            margin:0;
+            color:{{ block.settings.richtextcolor }};
+            text-align:{{ block.settings.text_alignment }};
+          }
+        </style>
+        <div id="CustomTextWrapper" style="display:flex;justify-content:center;align-items:{{ block.settings.text_alignment }};width:33%;flex-direction:column;">
+          <div style="color:{{ block.settings.textcolor }};font-size:{{ block.settings.textblocksize }}px;">{{ block.settings.textblock }}</div>
+          <div id="descText">{{ block.settings.richtextblock }}</div>
+          <a style="display:block;border-radius:{{ block.settings.Button_alignment }}px;margin-top:1rem;text-decoration:none;padding:1rem 2rem;background:{{ block.settings.buttonbgcolor }};color:{{ block.settings.buttoncolor }};" href="{{ block.settings.buttonurl }}">{{ block.settings.buttonText }}</a>
+        </div>
+        
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "text-between-image",
+    "settings": [],
+    "blocks" : [
+      {
+        "type" : "CustomImage",
+        "name" : "Add Image",
+        "settings" : [
+          {
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Vertical alignment",
+          "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+         "value": "center",
+         "label": "center"
+        },
+        {
+        "value": "right",
+        "label": "Right"
+        }
+      ],
+        "default": "left"
+       },
+          {
+            "type" : "image_picker",
+            "id" : "imageblock",
+            "label" : "Add image"
+          },
+          {
+            "type" : "range",
+            "id" : "imageWidth",
+            "label" : "Image Width",
+            "min" : 100,
+            "max" : 500,
+            "unit" : "px",
+            "step" : 25,
+            "default" : 100
+          },
+          {
+            "type" : "range",
+            "id" : "imageHeight",
+            "label" : "Image Width",
+            "min" : 100,
+            "max" : 500,
+            "unit" : "px",
+            "step" : 25,
+            "default" : 100
+          },
+          {
+            "type" : "text",
+            "id" : "imageradius",
+            "label" : "Round Corner"
+          }
+        ]
+      },
+      {
+        "type" : "CustomText",
+        "name" : "Add text",
+        "settings" : [
+          {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Vertical alignment",
+          "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+         "value": "center",
+         "label": "center"
+        },
+        {
+        "value": "right",
+        "label": "Right"
+        }
+      ],
+        "default": "left"
+       },
+          {
+            "type" : "text",
+            "id" : "textblock",
+            "label" : "Add Heading"
+          },
+          {
+            "type" : "color",
+            "id" : "textcolor",
+            "label" : "Heading Text Color"
+          },
+          {
+            "type" : "range",
+            "id" : "textblocksize",
+            "label" : "Heading Font Size",
+            "min" : 10,
+            "max" : 50,
+            "step" : 1,
+            "unit" : "px",
+            "default" : 16
+          },
+          {
+            "type" : "richtext",
+            "id" : "richtextblock",
+            "label" : "Add Description"
+          },
+          {
+            "type" : "color",
+            "id" : "richtextcolor",
+            "label" : "Description Text Color"
+          },
+          {
+            "type" : "text",
+            "id" : "buttonText",
+            "label" : "Button Text"
+          },
+          {
+            "type" : "url",
+            "id" : "buttonurl",
+            "label" : "Add Button Url"
+          },
+          {
+            "type" : "color",
+            "id" : "buttonbgcolor",
+            "label" : "Button Background Color"
+          },
+          {
+            "type" : "color",
+            "id" : "buttoncolor",
+            "label" : "Button Text Color"
+          },
+          {
+          "type": "select",
+          "id": "Button_alignment",
+          "label": "Corner alignment",
+          "options": [
+        {
+          "value": "0",
+          "label": "Normal"
+        },
+        {
+         "value": "15",
+         "label": "Curved"
+        },
+        {
+        "value": "20",
+        "label": "Round"
+        }
+      ],
+        "default": "15"
+       }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "text-between-image",
+        "category" : "text-between-image"
+      }
+    ]
+  }
+{% endschema %}

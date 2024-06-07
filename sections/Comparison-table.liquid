@@ -1,0 +1,469 @@
+<style>
+  #Comparison_table_Wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:5rem;
+    background:#fff;
+    border-radius:40px;
+  }
+  #Comparison_table_Wrapper td{
+    border:1px solid #000;
+    text-align:center;
+    font-size:2rem;
+    color:#000;
+  }
+  #Comparison_table_Wrapper td div{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  #{{ section.settings.hightlighted_column }}{
+    background:{{section.settings.column_color}};
+  }
+  {% if section.settings.column02enable == true %}
+  #columnTwo{
+    display:none;
+  }
+  {% endif %}
+  {% if section.settings.column03enable == true %}
+  #columnthree{
+    display:none;
+  }
+  {% endif %}
+  {% if section.settings.column04enable == true %}
+  #columnFour{
+    display:none;
+  }
+  {% endif %}
+
+  @media(max-width:767px){
+  #Comparison_table_Wrapper{
+    overflow:scroll;
+    padding:1rem!important;
+    display:block!important;
+  }
+
+  }
+</style>
+<section style="display:flex;justify-content:center;align-items:center;background:{{ section.settings.table_color }};padding:6rem 4rem;">
+  <div id="Comparison_table_Wrapper">
+    <table width="{{ section.settings.table_width }}" style="box-shadow:none;">
+      <tbody>
+        <tr>
+          <td></td>
+          <td id="columnOne">
+            {% if section.settings.column_image01 == blank %}
+              {{ section.settings.column_heading01 }}
+            {% else %}
+              <img src="{{ section.settings.column_image01 | img_url:'master' }}" width="100px" height="100px">
+            {% endif %}
+          </td>
+          <td id="columnTwo">
+            {% if section.settings.column_image02 == blank %}
+              {{ section.settings.column_heading02 }}
+            {% else %}
+              <img src="{{ section.settings.column_image02 | img_url:'master' }}" width="100px" height="100px">
+            {% endif %}
+          </td>
+          <td id="columnthree">
+            {% if section.settings.column_image03 == blank %}
+              {{ section.settings.column_heading03 }}
+            {% else %}
+              <img src="{{ section.settings.column_image03 | img_url:'master' }}" width="100px" height="100px">
+            {% endif %}
+          </td>
+          <td id="columnFour">
+            {% if section.settings.column_image04 == blank %}
+              {{ section.settings.column_heading04 }}
+            {% else %}
+              <img src="{{ section.settings.column_image04 | img_url:'master' }}" width="100px" height="100px">
+            {% endif %}
+          </td>
+        </tr>
+        {% for block in section.blocks %}
+          <tr>
+            <td style="text-align:center;">{{ block.settings.label_heading }}</td>
+            <td id="columnOne">
+              <div>
+                {% if block.settings.columnIcon01 == 'Check' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-31-check.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% elsif block.settings.columnIcon01 == 'Cross' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-29-cross.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% else %}
+                  <img
+                    style="display:none;"
+                    src=""
+                    width=""
+                    height=""
+                  >
+                {% endif %}
+              </div>
+              <div>{{ block.settings.columnText01 }}</div>
+            </td>
+            <td id="columnTwo">
+              <div>
+                {% if block.settings.columnIcon02 == 'Check' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-31-check.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% elsif block.settings.columnIcon02 == 'Cross' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-29-cross.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% else %}
+                  <img
+                    style="display:none;"
+                    src=""
+                    width=""
+                    height=""
+                  >
+                {% endif %}
+              </div>
+              <div>{{ block.settings.columnText02 }}</div>
+            </td>
+            <td id="columnthree">
+              <div>
+                {% if block.settings.columnIcon03 == 'Check' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-31-check.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% elsif block.settings.columnIcon03 == 'Cross' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-29-cross.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% else %}
+                  <img
+                    style="display:none;"
+                    src=""
+                    width=""
+                    height=""
+                  >
+                {% endif %}
+              </div>
+              <div>{{ block.settings.columnText03 }}</div>
+            </td>
+            <td id="columnFour">
+              <div>
+                {% if block.settings.columnIcon04 == 'Check' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-31-check.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% elsif block.settings.columnIcon04 == 'Cross' %}
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/system-regular-29-cross.png?v=1713351727"
+                    width="50px"
+                    height="50px"
+                  >
+                {% else %}
+                  <img
+                    style="display:none;"
+                    src=""
+                    width=""
+                    height=""
+                  >
+                {% endif %}
+              </div>
+              <div>{{ block.settings.columnText04 }}</div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    {
+      "type": "select",
+      "id": "hightlighted_column",
+      "label": "Highlighted column",
+      "options": [
+        {
+          "label": "none",
+          "value": "none"
+        },
+        {
+          "label": "1",
+          "value": "columnOne"
+        },
+        {
+          "label": "2",
+          "value": "columnTwo"
+        },
+        {
+          "label": "3",
+          "value": "columnthree"
+        },
+        {
+          "label": "4",
+          "value": "columnFour"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "column_heading01",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_image01",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "column02enable",
+      "label": "Disable column 2"
+    },
+    {
+      "type": "text",
+      "id": "column_heading02",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_image02",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "column03enable",
+      "label": "Disable column 3"
+    },
+    {
+      "type": "text",
+      "id": "column_heading03",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_image03",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "column04enable",
+      "label": "Disable column 4"
+    },
+    {
+      "type": "text",
+      "id": "column_heading04",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_image04",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "label": "Max width",
+      "id": "table_width",
+      "options": [
+        {
+          "label": "None",
+          "value": "500px"
+        },
+        {
+          "label": "Small",
+          "value": "600px"
+        },
+        {
+          "label": "Medium",
+          "value": "800px"
+        },
+        {
+          "label": "Large",
+          "value": "1000px"
+        }
+      ],
+      "default" : "600px"
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "table_color",
+      "label": "Color"
+    },
+    {
+      "type": "color",
+      "id": "column_color",
+      "label": "Highlighted column color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Add Label",
+      "settings" : [
+      {
+        "type": "text",
+        "id": "label_heading",
+        "label": "Add Heading"
+      },
+      {
+        "type": "header",
+        "content": "Column 1"
+      },
+      {
+        "type": "select",
+        "id": "columnIcon01",
+        "label": "Icons",
+        "options": [
+          {
+            "value": "none",
+            "label": "none"
+          },
+          {
+            "value": "Check",
+            "label": "Check"
+          },
+          {
+            "value": "Cross",
+            "label": "Cross"
+          }
+        ]
+        },
+        {
+          "type": "richtext",
+          "id": "columnText01",
+          "label": "Text"
+        },
+      {
+        "type": "header",
+        "content": "Column 2"
+      },
+      {
+        "type": "select",
+        "id": "columnIcon02",
+        "label": "Icons",
+        "options": [
+          {
+            "value": "none",
+            "label": "none"
+          },
+          {
+            "value": "Check",
+            "label": "Check"
+          },
+          {
+            "value": "Cross",
+            "label": "Cross"
+          }
+        ]
+        },
+        {
+          "type": "richtext",
+          "id": "columnText02",
+          "label": "Text"
+        },
+      {
+        "type": "header",
+        "content": "Column 3"
+      },
+      {
+        "type": "select",
+        "id": "columnIcon03",
+        "label": "Icons",
+        "options": [
+          {
+            "value": "none",
+            "label": "none"
+          },
+          {
+            "value": "Check",
+            "label": "Check"
+          },
+          {
+            "value": "Cross",
+            "label": "Cross"
+          }
+        ]
+        },
+        {
+          "type": "richtext",
+          "id": "columnText03",
+          "label": "Text"
+        },
+      {
+        "type": "header",
+        "content": "Column 4"
+      },
+      {
+        "type": "select",
+        "id": "columnIcon04",
+        "label": "Icons",
+        "options": [
+          {
+            "value": "none",
+            "label": "none"
+          },
+          {
+            "value": "Check",
+            "label": "Check"
+          },
+          {
+            "value": "Cross",
+            "label": "Cross"
+          }
+        ]
+        },
+        {
+          "type": "richtext",
+          "id": "columnText04",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,603 @@
+<style>
+   #collection-swiper-wrapper .SwiperCover{
+      width:100%;
+      height:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+  @media(min-width: 800px) and (max-width: 1200px){
+    #collection-swiper-wrapper .wrapper {
+      max-width: 1000px!important;
+      width: 100%!important;
+    }
+  }
+    #collection-swiper-wrapper .wrapper {
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+    }
+    #collection-swiper-wrapper .wrapper i {
+      top: 50%;
+      height: 50px;
+      width: 50px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      position: absolute;
+      text-align: center;
+      line-height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+      transform: translateY(-50%);
+      transition: transform 0.1s linear;
+    }
+    #collection-swiper-wrapper .wrapper i:active{
+      transform: translateY(-50%) scale(0.85);
+    }
+    #collection-swiper-wrapper .wrapper i:first-child{
+      left: -50px;
+    }
+    #collection-swiper-wrapper .wrapper i:last-child{
+      right: -50px;
+    }
+    #collection-swiper-wrapper .carousel{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% / 3));
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      border-radius: 8px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    #collection-swiper-wrapper .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    #collection-swiper-wrapper .carousel.no-transition {
+      scroll-behavior: auto;
+    }
+    #collection-swiper-wrapper .carousel.dragging {
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+    }
+    #collection-swiper-wrapper .carousel.dragging #collection-swiper-wrapper .card {
+      cursor: grab;
+      user-select: none;
+    }
+    #collection-swiper-wrapper .carousel :where(#collection-swiper-wrapper .card, .img) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #collection-swiper-wrapper .card {
+      scroll-snap-align: start;
+      height: 100%;
+      list-style: none;
+      cursor: pointer;
+      padding-bottom: 15px;
+      flex-direction: column;
+      border-radius: 8px;
+      position:relative;
+    }
+     #collection-swiper-wrapper .card .img {
+      height: 100%;
+      width: 100%;
+    }
+    #collection-swiper-wrapper .card .img img {
+      width:{{ section.settings.SwiperImgWidth }}px;
+      height:{{ section.settings.SwiperImgHeight }}px;
+      border-radius:{{ section.settings.swiperImgShape }};
+      object-fit: cover;
+      padding:2.5rem;
+    }
+    #collection-swiper-wrapper .card h2 {
+      font-weight: 500;
+      font-size: 1.56rem;
+      margin: 30px 0 5px;
+    }
+    #collection-swiper-wrapper .card span {
+      color: #6A6D78;
+      font-size: 1.31rem;
+    }
+    .fullWidth{
+        width:100%;
+      }
+      .fullWidthWithPadded{
+        width:90vw;
+        margin:0 auto;
+        padding:0 20px;
+      }
+      .pageWidth{
+        width:1200px;
+        margin:0 auto;
+      }
+
+
+    @media screen and (max-width: 767px) {
+      #collection-swiper-wrapper .carousel {
+        grid-auto-columns: 100%;
+      }
+      #collection-swiper-wrapper .wrapper i:first-child{
+      left: 35%;
+      top: 100%;
+    }
+    #collection-swiper-wrapper .wrapper i:last-child{
+      right: 35%;
+      top: 100%;
+    }
+      #collection-swiper-wrapper .card {
+      margin-right: -4rem;
+  }
+      {% if section.settings.MobileColumn == 'TwoColumn' %}
+      #collection-swiper-wrapper .carousel {
+        grid-auto-columns: calc((100% / 2));
+      }
+        #collection-swiper-wrapper .card h3{
+          top:45%!important;
+        }
+        #collection-swiper-wrapper .card .img{
+          width:100%!important;
+          height:65%!important;
+        }
+      #collection-swiper-wrapper .card .img img {
+      width:100%;
+      height:100%;
+    }
+    {% endif %}
+    }
+</style>
+
+<section
+  id="collection-swiper-wrapper"
+  class="{% if section.settings.sectionWidth == "FirstWidth" %}fullWidth{% endif %}{% if section.settings.sectionWidth == "SecondWidth" %}fullWidthWithPadded{% endif %}{% if section.settings.sectionWidth == 'ThirdWidth' %}pageWidth{% endif %}"
+  style="background:{{ section.settings.Section_BgColor }};padding-top:{{ section.settings.sectionPaddingTop }}px;padding-bottom:{{ section.settings.sectionPaddingBottom }}px"
+>
+  <h2
+    class="center"
+    style="font-size:{{ section.settings.headingSize }}px;font-weight:700;color:{{ section.settings.collectionTitleColor }}"
+  >
+    {{ section.settings['Collection-Heading'] }}
+  </h2>
+  {% if section.settings.sectionLayout == 'carousel' %}
+    <div class="SwiperCover">
+      <div class="wrapper">
+        <i id="collectionleft" class="fa-solid fa-angle-left"></i>
+        <ul class="carousel">
+          {%- for block in section.blocks -%}
+            <li class="card" style="background-color:{{ block.settings.SwiperBgColor }}">
+              {% assign collection = collections[block.settings.SwiperCollection] %}
+              <a href="{{ collection.url }}" class="img"
+                >
+                {% if block.settings.CollectionListSwiperImg != blank %}
+                <img
+                  src="{{ block.settings.CollectionListSwiperImg | img_url:'master' }}"
+                  height=""
+                  width=""
+                  alt="img"
+                  draggable="false"
+              >
+                  {% elsif block.settings.CollectionListSwiperImg == blank %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/placeholder-images-collection-1_large_af129419-bbb1-4281-a220-740f7f1bc5d0.webp?v=1717152378"
+                  height=""
+                  width=""
+                  alt="img"
+                  draggable="false"
+              >
+                  {% endif %}
+                  </a>
+              {% if section.settings.textOverlay != blank %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);color:{{ block.settings.swiperText }};">
+                  {{ collection.title }}
+                </h3>
+              {% else %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;color:{{ block.settings.swiperText }};">
+                  {{ collection.title }}
+                </h3>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        <i id="collectionright" class="fa-solid fa-angle-right"></i>
+      </div>
+    </div>
+  {% else %}
+    <style>
+        .Gridwrapper{
+          width:100%;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+        }
+        .Gridcarousel{
+          width:100%;
+          display:flex;
+          justify-content:{{ section.settings.SwiperAlignment }};
+          align-items:center;
+          flex-wrap:wrap;
+          list-style:none;
+        }
+        .Gridcard {
+          position:relative;
+        }
+        .Gridcard .Gridimg img{
+           width:{{ section.settings.SwiperImgWidth }}px;
+           height:{{ section.settings.SwiperImgHeight }}px;
+           border-radius:{{ section.settings.swiperImgShape }};
+          object-fit: cover;
+          padding:2rem;
+        }
+        {% if section.settings.MobileColumn == 'TwoColumn' %}
+        .Gridwrapper .Gridcarousel {
+          grid-auto-columns: calc((100% / 2));
+        }
+        .Gridcard .img img {
+        width:90%;
+        height:90%;
+      }
+      {% endif %}
+    </style>
+    <div class="SwiperCover">
+      <div class="Gridwrapper">
+        <ul class="Gridcarousel">
+          {%- for block in section.blocks -%}
+            <li class="Gridcard" style="background-color:{{ block.settings.SwiperBgColor }}">
+              {% assign collection = collections[block.settings.SwiperCollection] %}
+              <a href="{{ collection.url }}" class="Gridimg"
+                ><img
+                  src="{{ block.settings.CollectionListSwiperImg | img_url:'master' }}"
+                  height=""
+                  width=""
+                  alt="img"
+                  draggable="false"
+              ></a>
+              {% if section.settings.textOverlay != blank %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);color:{{ block.settings.swiperText }};">
+                  {{ collection.title }}
+                </h3>
+              {% else %}
+                <h3 style="font-size:{{ section.settings.TextSize }}px;color:{{ block.settings.swiperText }};">
+                  {{ collection.title }}
+                </h3>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const wrapper = document.querySelector("#collection-swiper-wrapper .wrapper");
+    const carousel = document.querySelector("#collection-swiper-wrapper .carousel");
+    const firstCardWidth = carousel.querySelector("#collection-swiper-wrapper .card").offsetWidth;
+    const arrowBtns = document.querySelectorAll("#collection-swiper-wrapper .wrapper i");
+    const carouselChildrens = [...carousel.children];
+    let isDragging = false,
+        isAutoPlay = true,
+        startX,
+        startScrollLeft,
+        timeoutId;
+
+    // Get the number of cards that can fit in the carousel at once
+    let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
+
+    // Insert copies of the last few cards to beginning of carousel for infinite scrolling
+    carouselChildrens.slice(-cardPerView).reverse().forEach(card => {
+      carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
+    });
+
+    // Insert copies of the first few cards to end of carousel for infinite scrolling
+    carouselChildrens.slice(0, cardPerView).forEach(card => {
+      carousel.insertAdjacentHTML("beforeend", card.outerHTML);
+    });
+
+    // Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
+    carousel.classList.add("no-transition");
+    carousel.scrollLeft = carousel.offsetWidth;
+    carousel.classList.remove("no-transition");
+
+    // Add event listeners for the arrow buttons to scroll the carousel left and right
+    arrowBtns.forEach(btn => {
+      btn.addEventListener("click", function(e) {
+        carousel.scrollLeft += btn.id == "collectionleft" ? -firstCardWidth : firstCardWidth;
+        e.preventDefault();
+      });
+    });
+
+    // ***************************************************
+
+    const dragStart = function(e) {
+      // updatating global variables value on mouse down event
+      isDragStart = true;
+      startX = e.pageX || e.touches[0].pageX;
+      startScrollLeft = carousel.scrollLeft;
+    }
+
+    const dragging = function(e) {
+      // scrolling images/carousel to left according to mouse pointer
+      if(!isDragStart) return;
+      e.preventDefault();
+      isDragging = true;
+      carousel.classList.add("dragging");
+      positionDiff = (e.pageX || e.touches[0].pageX) - startX;
+      carousel.scrollLeft = startScrollLeft - positionDiff;
+    }
+
+    const dragStop = function() {
+      isDragStart = false;
+      carousel.classList.remove("dragging");
+      if(!isDragging) return;
+      isDragging = false;
+    }
+
+    const infiniteScroll = function() {
+      // If the carousel is at the beginning, scroll to the end
+      if(carousel.scrollLeft === 0) {
+        carousel.classList.add("no-transition");
+        carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
+        carousel.classList.remove("no-transition");
+      }
+
+      // If the carousel is at the end, scroll to the beginning
+      else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+        carousel.classList.add("no-transition");
+        carousel.scrollLeft = carousel.offsetWidth;
+        carousel.classList.remove("no-transition");
+      }
+
+      // Clear existing timeout & start autoplay if mouse is not hovering over carousel
+      clearTimeout(timeoutId);
+      if(!wrapper.matches(":hover")) autoPlay();
+    }
+
+    const autoPlay = function() {
+      if(window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+
+      // Autoplay the carousel after every 2500 ms
+      timeoutId = setTimeout(function() {
+        carousel.scrollLeft += firstCardWidth;
+      }, 2500);
+    }
+    autoPlay();
+
+    carousel.addEventListener("mousedown", dragStart);
+    carousel.addEventListener("mousemove", dragging);
+    document.addEventListener("mouseup", dragStop);
+    carousel.addEventListener("scroll", infiniteScroll);
+    wrapper.addEventListener("mouseenter", function() {
+      clearTimeout(timeoutId);
+    });
+    wrapper.addEventListener("mouseleave", autoPlay);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Featured List",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Layout"
+    },
+    {
+      "type" : "select",
+      "id" : "sectionLayout",
+      "label" : "Layout",
+      "options" : [
+        {
+          "value" : "grid",
+          "label" : "Grid"
+        },
+        {
+          "value" : "carousel",
+          "label" : "Carousel"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id" : "SwiperAlignment",
+      "label" : "Alignment",
+      "options" : [
+        {
+          "value" : "flex-start",
+          "label" : "Left"
+        },
+        {
+          "value" : "Center",
+          "label" : "Center"
+        },
+        {
+          "value" : "flex-end",
+          "label" : "Right"
+        }
+      ],
+      "default" : "flex-start"
+    },
+    {
+      "type" : "range",
+      "id" : "SwiperImgWidth",
+      "label" : "Width",
+      "max" : 300,
+      "min" : 100,
+      "step" : 25,
+      "unit" : "px",
+      "default" : 100
+    },
+    {
+      "type" : "range",
+      "id" : "SwiperImgHeight",
+      "label" : "Height",
+      "max" : 300,
+      "min" : 100,
+      "step" : 25,
+      "unit" : "px",
+      "default" : 100
+    },
+    {
+      "type" : "select",
+      "id" : "swiperImgShape",
+      "label" : "Image Shape",
+      "options" : [
+        {
+          "value" : "50%",
+          "label" : "Circles"
+        },
+        {
+          "value" : "0%",
+          "label" : "Squares"
+        }
+      ]
+    },
+    {
+      "type" : "header",
+      "content" : "Text"
+    },
+    {
+      "type" : "text",
+      "id" : "Collection-Heading",
+      "label" : "Heading",
+      "default" : "Collection"
+    },
+    {
+      "type" : "range",
+      "id" : "headingSize",
+      "label" : "Collection title size",
+      "max" : 100,
+      "min" : 20,
+      "step" : 5,
+      "unit" : "px",
+      "default" : 20
+    },
+    {
+      "type" : "range",
+      "id" : "TextSize",
+      "label" : "Text size",
+      "max" : 40,
+      "min" : 20,
+      "step" : 2,
+      "unit" : "px",
+      "default" : 20
+    },
+    {
+      "type" : "checkbox",
+      "id" : "textOverlay",
+      "info": "Text over images",
+      "label" : "Overlay Text",
+      "default" : false
+    },
+     {
+       "type" : "select",
+       "id" : "MobileColumn",
+       "label" : "Column In Mobile",
+       "options" : [
+         {
+           "value" : "TwoColumn",
+           "label" : "2 Column"
+         },
+         {
+           "value" : "OneColumn",
+           "label" : "1 Column"
+         }
+       ]
+     },
+    {
+      "type" : "color",
+      "id" : "Section_BgColor",
+      "label" : "Background"
+    },
+    {
+      "type" : "color",
+      "id" : "collectionTitleColor",
+      "label" : "text Color"
+    },
+    {
+      "type" : "header",
+      "content" : "Section spacing"
+    },
+    {
+      "type" : "select",
+      "id" : "sectionWidth",
+      "label" : "Width",
+      "options" : [
+        {
+          "value" : "FirstWidth",
+          "label" : "Full Width"
+        },
+        {
+          "value" : "SecondWidth",
+          "label" : "Full Width With Padded"
+        },
+        {
+          "value" : "ThirdWidth",
+          "label" : "Page Width"
+        }
+      ]
+    },
+    {
+      "type" : "range",
+      "id" : "sectionPaddingTop",
+      "label" : "Padding top",
+      "max" : 100,
+      "min" : 0,
+      "unit" : "px",
+      "step" : 10,
+      "default" : 20
+    },
+    {
+      "type" : "range",
+      "id" : "sectionPaddingBottom",
+      "label" : "Padding bottom",
+      "max" : 100,
+      "min" : 0,
+      "unit" : "px",
+      "step" : 10,
+      "default" : 20
+    }
+  ],
+
+  "blocks" : [
+    {
+      "type" : "collection",
+      "name" : "Collection List",
+      "settings" : [
+        {
+          "type" : "collection",
+          "id" : "SwiperCollection",
+          "label" : "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id" : "CollectionListSwiperImg",
+          "label" : "Image"
+        },
+        {
+          "type" : "header",
+          "content" : "Colors"
+        },
+        {
+          "type" : "color",
+          "id" : "SwiperBgColor",
+          "label" : "Background"
+        },
+        {
+          "type" : "color",
+          "id" : "swiperText",
+          "label" : "Text Color"
+        }
+      ]
+    }
+  ],
+  "presets" : [
+  {
+    "name" : "Swiper",
+    "category" : "Swiper"
+  }
+]
+}
+{% endschema %}

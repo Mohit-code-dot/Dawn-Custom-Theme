@@ -1,0 +1,817 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+>
+
+<section
+  id="collectioncardsection"
+  style="background:{{ section.settings.sectionbgcolor }};display:flex;justify-content:center;align-items:center;flex-direction:column;"
+>
+  <style>
+     #collectioncardsection .swiper {
+       width: 90%;
+       height: 100%;
+       background:{{ section.settings.sectionbgcolor }};
+     }
+     #collectioncardsection .swiper-slide a:after{
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 5%;
+       height: 100%;
+       width: 90%;
+     }
+     #collectioncardsection .swiper-slide {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding:2rem;
+       margin-right:0!important;
+     }
+     #CardWrapper:hover{
+       box-shadow: 12px 12px 0 2px {{ section.settings.cardsborder }};
+      }
+      #Card_Content_Wrapper h2{
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px;
+          min-height: 3.2em;
+          color:{{section.settings.cardstext}};
+      }
+       #collectioncardsection .swiper-wrapper {
+         padding: 0 0 9rem 0;
+      }
+      #collectioncardsection .swiper-wrapper .card__content {
+         display: flex;
+         justify-content: flex-start;
+         align-items: flex-start;
+         padding:0!important;
+       }
+      #collectioncardsection .swiper-wrapper .card__information{
+       display:none!important;
+      }
+      #collectioncardsection .alwayshide{
+       display:none!important;
+     }
+      #collectioncardsection .showhide{
+       display:flex!important;
+     }
+      #collectioncardsection #swiper01{
+       display:none;
+     }
+      #collectioncardsection #swiper02{
+       display:none;
+     }
+     #collectioncardsection #swiper03{
+       display:none;
+     }
+     #collectioncardsection #swiper04{
+       display:none;
+     }
+      #collectioncardsection #swiper05{
+       display:none;
+     }
+     #collectioncardsection .swiper-button-next{
+       right:45%!important;
+       top:90%;
+       background:#fff;
+       color:#000;
+       width:50px!important;
+       height:50px!important;
+       border-radius:50%!important;
+     }
+     #collectioncardsection .swiper-button-next:after, .swiper-button-prev:after{
+       font-size:2rem!important;
+     }
+     #collectioncardsection .media>img {
+        object-fit:fill!important;
+       }
+     #collectioncardsection .swiper-button-prev{
+       left:45%!important;
+       top:90%;
+       background:#fff;
+       color:#000;
+       width:50px!important;
+       height:50px!important;
+       border-radius:50%!important;
+     }
+         #collectioncardsection .select-menu {
+         width: 500px;
+         cursor: pointer;
+         font-size: 25px;
+         background-image: linear-gradient(to right, #F39D52, #C5E600, #FFD07A);
+         padding: 2px;
+         border-radius: 40px;
+         cursor: pointer;
+         position:relative;
+       }
+
+      #collectioncardsection .select {
+        border-radius: 40px;
+        background-color: {{section.settings.cardimagecolor}};
+        padding: 20px 40px;
+        width:100%;
+        color:{{section.settings.cardstext}};
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       }
+       #collectioncardsection .select span{
+         margin: 0 1rem;
+         font-weight:800;
+       }
+      #collectioncardsection .select i{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       }
+      #collectioncardsection .select:after{
+         content:none!important;
+         border:none;
+       }
+
+      #collectioncardsection .options-list {
+         position: absolute;
+         overflow-y: hidden;
+         height: 0;
+         z-index:9999;
+         width:100%;
+         background-color: {{section.settings.cardimagecolor}};
+         top:100px;
+         border-radius:30px;
+         box-shadow: 0px 38px 64px 0px rgba(243,157,82,.2);
+       }
+
+      #collectioncardsection .option {
+         transition: .3s ease-in-out;
+         padding: 15px 0;
+         font-size: 25px;
+         display: block;
+         white-space: nowrap;
+         margin: 10px 0;
+         cursor: pointer;
+         color:{{section.settings.cardstext}};
+       }
+
+      #collectioncardsection .options-list a{
+         display:block;
+         text-decoration: none;
+         text-align: center;
+         border-radius: 2em;
+         background-color: {{ section.settings.sectionbgcolor }};
+         font-weight: 900;
+         font-size: 18px;
+         color:{{section.settings.cardstext}};
+         padding: 16px;
+       }
+       #collectioncardsection .options-list.active {
+         height: 530px;
+         border: 1px solid #612d0f;
+         padding: 0 30px 30px 30px;
+       }
+       @media(max-width:767px){
+         #collectioncardsection .select-menu{
+           width:90%;
+           margin:2rem 0;
+         }
+         #collectioncardsection .select{
+           padding: 20px 0px;
+           font-size: 17px;
+         }
+        #collectioncardsection .option {
+         padding: 10px 0;
+         font-size: 14px;
+         }
+        #collectioncardsection .options-list.active {
+         height: 380px;
+        }
+        #collectioncardsection .swiper-slide {
+          padding:0;
+        }
+       #collectioncardsection #CardWrapper{
+         padding:1rem;
+         height:500px!important;
+       }
+        #collectioncardsection .swiper-button-next{
+       right:30%!important;
+       top:95%;
+     }
+     #collectioncardsection .swiper-button-prev{
+       left:30%!important;
+       top:95%;
+     }
+    #collectioncardsection .swiper {
+       width: 100%;
+     }
+     }
+     @media(min-width:1920px){
+       #CardWrapper{
+         height:500px!important;
+       }
+     }
+  </style>
+
+  <div class="select-menu">
+    <div class="select">
+      I'm looking for
+      <span>{{ section.settings.productscollection.title }}</span>
+      <i
+        ><img
+          src="https://cdn.shopify.com/s/files/1/0615/5095/2653/files/arrow-down-brown.svg?v=1710841274"
+          width="30px"
+          height="30px"
+      ></i>
+    </div>
+    <div class="options-list">
+      <div id="tag01" class="option">{{ section.settings.productscollection.title }}</div>
+      <div id="tag02" class="option">{{ section.settings.productscollection2.title }}</div>
+      <div id="tag03" class="option">{{ section.settings.productscollection3.title }}</div>
+      <div id="tag04" class="option">{{ section.settings.productscollection4.title }}</div>
+      <div id="tag05" class="option">{{ section.settings.productscollection5.title }}</div>
+      <div><a href="#">Shop All</a></div>
+    </div>
+  </div>
+
+  <div class="swiper mySwiper1" id="swiper0">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="swiper mySwiper2" id="swiper01">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};padding:1rem;"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="swiper mySwiper3" id="swiper02">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection2.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="swiper mySwiper4" id="swiper03">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection3.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="swiper mySwiper5" id="swiper04">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection4.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <div class="swiper mySwiper6" id="swiper05">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.productscollection5.products %}
+        <div class="swiper-slide">
+          <a
+            href="{{ product.url }}"
+            style="display:flex;justify-content:center;align-items:flex-start;text-decoration:none;flex-direction:column;"
+          >
+            <div
+              id="CardWrapper"
+              style="width:300px;height:100%;border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;transition: all ease .3s;"
+            >
+              <div
+                id="Card_image_Wrapper"
+                style="border:1px solid {{ section.settings.cardsborder }};padding:3rem;border-radius:15px;background-color: {{ section.settings.cardimagecolor }};"
+              >
+                {% render 'card-product', card_product: product -%}
+                <!-- <img src="{{  product.media | img_url: '500 500' }}"> -->
+              </div>
+              <div
+                id="Card_Content_Wrapper"
+                style="height:50%;display: flex;justify-content: center;flex-direction: column;"
+              >
+                <div>
+                  <h2 style="padding:0!important;">{{ product.title }}</h2>
+                </div>
+                <div>
+                  <p style="color:{{section.settings.cardstext}};font-weight:900;font-size:20px;padding:0;margin-top:0;">
+                    {{ product.price | money }}
+                  </p>
+                </div>
+                <div style="text-align:center;border-radius: 6px;background: {{ section.settings.cardbtncolor }};font-weight: 900;z-index:9999999;">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="submit" value="Add To Cart" style="text-decoration:none;color:{{section.settings.cardstext}};width: 93%;border: none;outline: none;background: none;cursor: pointer;padding: 1rem;">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+{{ 'swiper.js' | asset_url | script_tag }}
+
+<script>
+  var swiper1 = new Swiper(".mySwiper1", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+        1920: {
+          slidesPerView: 5,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  var swiper2 = new Swiper(".mySwiper2", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  var swiper3 = new Swiper(".mySwiper3", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  var swiper4 = new Swiper(".mySwiper4", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  var swiper5 = new Swiper(".mySwiper5", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  var swiper6 = new Swiper(".mySwiper6", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop:true,
+    breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+
+    var select = document.querySelector(" #collectioncardsection .select");
+    var options_list = document.querySelector(" #collectioncardsection .options-list");
+    var options = document.querySelectorAll(" #collectioncardsection .option");
+    var selected  = document.querySelector(" #collectioncardsection .selected ");
+    var span = document.querySelector(" #collectioncardsection .select span");
+    var tag01 = document.querySelector("#tag01");
+    var tag02 = document.querySelector("#tag02");
+    var tag03 = document.querySelector("#tag03");
+    var tag04 = document.querySelector("#tag04");
+    var tag05 = document.querySelector("#tag05");
+    var swiper0 = document.querySelector("#swiper0");
+    var swiper01 = document.querySelector("#swiper01");
+    var swiper02 = document.querySelector("#swiper02");
+    var swiper03 = document.querySelector("#swiper03");
+    var swiper04 = document.querySelector("#swiper04");
+    var swiper05 = document.querySelector("#swiper05");
+
+
+    //show & hide options list
+    select.addEventListener("click", () => {
+      options_list.classList.toggle("active");
+    });
+
+    //select option
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        options.forEach((option) => { option.classList.remove('selected') });
+        select.querySelector("span").innerHTML = option.innerHTML;
+        option.classList.add("selected");
+        options_list.classList.toggle("active");
+        swiper0.classList.add("alwayshide");
+        var ttttt = span.innerHTML;
+       if( ttttt == tag01.innerHTML ){
+          swiper05.classList.remove("showhide");
+          swiper04.classList.remove("showhide");
+          swiper03.classList.remove("showhide");
+          swiper02.classList.remove("showhide");
+          swiper01.classList.add("showhide");
+       }else if(ttttt == tag02.innerHTML){
+          swiper05.classList.remove("showhide");
+          swiper04.classList.remove("showhide");
+          swiper03.classList.remove("showhide");
+          swiper01.classList.remove("showhide");
+          swiper02.classList.add("showhide");
+       }
+       else if( ttttt == tag03.innerHTML ){
+          swiper04.classList.remove("showhide");
+          swiper05.classList.remove("showhide");
+          swiper02.classList.remove("showhide");
+          swiper01.classList.remove("showhide");
+          swiper03.classList.add("showhide");
+       }else if(ttttt == tag04.innerHTML){
+          swiper01.classList.remove("showhide");
+          swiper02.classList.remove("showhide");
+          swiper03.classList.remove("showhide");
+          swiper05.classList.remove("showhide");
+          swiper04.classList.add("showhide");
+       }else if(ttttt == tag05.innerHTML){
+          swiper01.classList.remove("showhide");
+          swiper02.classList.remove("showhide");
+          swiper03.classList.remove("showhide");
+          swiper04.classList.remove("showhide");
+          swiper05.classList.add("showhide");
+       }
+      });
+    });
+</script>
+{% schema %}
+{
+  "name": "Collection Card",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Add Collection 1"
+    },
+    {
+      "type" : "collection",
+      "id" : "productscollection",
+      "label"  : "Add Collection 1"
+    },
+    {
+      "type" : "header",
+      "content" : "Add Collection 2"
+    },
+    {
+      "type" : "collection",
+      "id" : "productscollection2",
+      "label"  : "Add Collection 2"
+    },
+    {
+      "type" : "header",
+      "content" : "Add Collection 3"
+    },
+    {
+      "type" : "collection",
+      "id" : "productscollection3",
+      "label"  : "Add Collection 3"
+    },
+    {
+      "type" : "header",
+      "content" : "Add Collection 4"
+    },
+    {
+      "type" : "collection",
+      "id" : "productscollection4",
+      "label"  : "Add Collection 4"
+    },
+    {
+      "type" : "header",
+      "content" : "Add Collection 5"
+    },
+    {
+      "type" : "collection",
+      "id" : "productscollection5",
+      "label"  : "Add Collection 5"
+    },
+    {
+      "type" : "color",
+      "id" : "cardstext",
+      "label" : "Card Text Color"
+    },
+    {
+      "type" : "color",
+      "id" : "cardsborder",
+      "label" : "Card Border"
+    },
+    {
+      "type" : "color",
+      "id" : "cardimagecolor",
+      "label" : "Image Background Color"
+    },
+    {
+      "type" : "color",
+      "id" : "cardbtncolor",
+      "label" : "Card Button Color"
+    },
+    {
+      "type" : "color",
+      "id" : "sectionbgcolor",
+      "label" : "Section Color"
+    }
+  ],
+  "presets" : [
+    {
+      "name" : "Collection Card",
+      "category" : "Collection Card"
+    }
+  ]
+}
+{% endschema %}
